@@ -4,45 +4,32 @@
 
 int top, S[1000];
 
-void push(int x)
-{
-  S[++top] = x;
-}
+void push(int x) { S[++top] = x; }
 
-int pop()
-{
+int pop() {
   top--;
   return S[top + 1];
 }
 
-int main()
-{
+int main() {
   int a, b;
   top = 0;
   char s[100];
 
-  while (scanf("%s", s) != EOF)
-  {
-    if (s[0] == '+')
-    {
+  while (scanf("%s", s) != EOF) {
+    if (s[0] == '+') {
       a = pop();
       b = pop();
       push(a + b);
-    }
-    else if (s[0] == '-')
-    {
+    } else if (s[0] == '-') {
       b = pop();
       a = pop();
       push(a - b);
-    }
-    else if (s[0] == '*')
-    {
+    } else if (s[0] == '*') {
       a = pop();
       b = pop();
       push(a * b);
-    }
-    else
-    {
+    } else {
       push(atoi(s));
     }
   }
