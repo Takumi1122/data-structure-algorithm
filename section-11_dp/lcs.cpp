@@ -1,6 +1,6 @@
-#include<iostream>
-#include<string>
-#include<algorithm>
+#include <algorithm>
+#include <iostream>
+#include <string>
 using namespace std;
 static const int N = 1000;
 
@@ -9,8 +9,8 @@ int lcs(string X, string Y) {
   int m = X.size();
   int n = Y.size();
   int maxl = 0;
-  X = ' ' + X; // X[0]に空白を挿入
-  Y = ' ' + Y; // Y[0]に空白を挿入
+  X = ' ' + X;  // X[0]に空白を挿入
+  Y = ' ' + Y;  // Y[0]に空白を挿入
   for (int i = 1; i <= m; i++) c[i][0] = 0;
   for (int j = 1; j <= n; j++) c[0][j] = 0;
 
@@ -29,7 +29,8 @@ int lcs(string X, string Y) {
 
 int main() {
   string s1, s2;
-  int n; cin >> n;
+  int n;
+  cin >> n;
   for (int i = 0; i < n; i++) {
     cin >> s1 >> s2;
     cout << lcs(s1, s2) << endl;

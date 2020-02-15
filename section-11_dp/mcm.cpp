@@ -1,5 +1,5 @@
-#include<iostream>
-#include<algorithm>
+#include <algorithm>
+#include <iostream>
 using namespace std;
 
 static const int N = 100;
@@ -7,7 +7,7 @@ static const int N = 100;
 int main() {
   int n, p[N + 1], m[N + 1][N + 1];
   cin >> n;
-  for (int i = 1; i <=n; i++) {
+  for (int i = 1; i <= n; i++) {
     cin >> p[i - 1] >> p[i];
   }
 
