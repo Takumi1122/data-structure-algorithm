@@ -8,7 +8,7 @@ int main() {
   int n;
   bool b = false;
   cin >> n;
-  while (n != 0) {
+  while (n) {
     if (n % 10 == 7) {
       b = true;
     }
