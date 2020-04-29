@@ -4,6 +4,8 @@
 #include <vector>
 using namespace std;
 
+// o(|V|^3)
+
 static const int MAX = 100;
 static const long long INFTY = (1LL << 32);
 

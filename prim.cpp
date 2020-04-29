@@ -6,6 +6,8 @@ static const int WHITE = 0;
 static const int GRAY = 1;
 static const int BLACK = 2;
 
+// o(|v|^2)
+
 int n, M[MAX][MAX];
 
 int prim() {

@@ -3,6 +3,8 @@ using namespace std;
 #define MAX 10000
 #define INFTY (1 << 29)
 
+// o(|E|log|E|)
+
 class DisjointSet {
  public:
   vector<int> rank, p;
