@@ -7,12 +7,12 @@ using P = pair<int, int>;
 int main() {
   string s;
   cin >> s;
-  deque<char> Q;
-  for (char c : s) Q.push_back(c);
+  deque<char> q;
+  for (char c : s) q.push_back(c);
   bool flip = false;
-  int q;
-  cin >> q;
-  rep(qi, q) {
+  int Q;
+  cin >> Q;
+  rep(qi, Q) {
     int ty;
     cin >> ty;
     if (ty == 1) {
@@ -21,16 +21,17 @@ int main() {
       int f;
       char c;
       cin >> f >> c;
+      if (flip) f = 3 - f;
       if (f == 1) {
-        Q.push_front(c);
+        q.push_front(c);
       } else {
-        Q.push_back(c);
+        q.push_back(c);
       }
     }
   }
-  if (flip) reverse(Q.begin(), Q.end());
+  if (flip) reverse(q.begin(), q.end());
   string ans;
-  for (char c : Q) ans += c;
+  for (char c : q) ans += c;
   cout << ans << endl;
   return 0;
 }
