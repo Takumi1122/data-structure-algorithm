@@ -3,7 +3,7 @@
 using namespace std;
 using Graph = vector<vector<int>>;
 
-// 深さ優先探索
+// 深さ優先探索 o(|V|+|E|)
 vector<bool> seen;
 void dfs(const Graph &G, int v) {
   seen[v] = true;  // v を訪問済にする
