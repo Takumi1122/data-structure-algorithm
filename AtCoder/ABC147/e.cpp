@@ -5,7 +5,7 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int n;
+  int n, a;
   cin >> n;
   return 0;
 }
