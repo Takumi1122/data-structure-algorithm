@@ -50,6 +50,7 @@ struct mint {
   }
 };
 
+// エラトステネスの篩 o(n*loglog(n))
 struct Sieve {
   int n;
   vector<int> f, primes;
