@@ -7,20 +7,23 @@ using P = pair<int, int>;
 int main() {
   ll a, b, x;
   cin >> a >> b >> x;
+
+  // 二分探索用の関数
+  auto keta = [&](ll n) {
+    ll res = 0;
+    while (n) ++res, n /= 10;
+    return res;
+  };
+
+  auto f = [&](ll n) { return a * n + b * keta(n); };
+
   ll l = 0, r = 1e9 + 1;
   while (l + 1 < r) {
-    ll t = (l + r) / 2;
-    ll keta = t;
-    ll d = 0;
-    while (keta > 0) {
-      d++;
-      keta /= 10;
-    }
-    ll sum = a * t + b * d;
-    if (x >= sum) {
-      l = t;
+    ll mid = (l + r) / 2;
+    if (x >= f(mid)) {
+      l = mid;
     } else {
-      r = t;
+      r = mid;
     }
   }
   cout << l << endl;

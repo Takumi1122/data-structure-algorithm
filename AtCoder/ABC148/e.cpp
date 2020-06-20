@@ -1,20 +1,23 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-long long solve(long long N) {
-  if (N % 2 == 1) return 0;
+ll solve(ll n) {
+  if (n % 2 == 1) return 0;
 
-  long long res = 0;
-  N /= 2;
-  while (N) {
-    res += N / 5;
-    N /= 5;
+  ll res = 0;
+  n /= 2;
+  while (n) {
+    res += n / 5;
+    n /= 5;
   }
   return res;
 }
 
 int main() {
-  long long N;
-  cin >> N;
-  cout << solve(N) << endl;
+  ll n;
+  cin >> n;
+  cout << solve(n) << endl;
 }

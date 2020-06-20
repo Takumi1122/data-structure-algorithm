@@ -1,27 +1,32 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-// r -> P, s -> R, p -> S
+// r -> p, s -> r, p -> s
 int main() {
-  int N, K, R, S, P;
-  string T;
-  cin >> N >> K >> R >> S >> P >> T;
+  int n, k, r, s, p;
+  string t;
+  cin >> n >> k >> r >> s >> p >> t;
+
   auto score = [&](int i) {
-    if (T[i] == 'r')
-      return P;
-    else if (T[i] == 's')
-      return R;
+    if (t[i] == 'r')
+      return p;
+    else if (t[i] == 's')
+      return r;
     else
-      return S;
+      return s;
   };
-  long long res = 0;
-  for (int k = 0; k < K; ++k) {
+
+  ll res = 0;
+  rep(i, k) {
     bool last = false;
-    for (int i = k; i < N; i += K) {
-      if (i >= K && T[i - K] == T[i] && last)
+    for (int j = i; j < n; j += k) {
+      if (j >= k && t[j - k] == t[j] && last)
         last = false;
       else
-        res += score(i), last = true;
+        res += score(j), last = true;
     }
   }
   cout << res << endl;

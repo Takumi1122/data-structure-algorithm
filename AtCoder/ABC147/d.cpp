@@ -1,24 +1,27 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 const int MOD = 1000000007;
 int main() {
-  int N;
-  cin >> N;
-  vector<long long> A(N);
-  for (int i = 0; i < N; ++i) cin >> A[i];
+  int n;
+  cin >> n;
+  vector<ll> a(n);
+  rep(i, n) cin >> a[i];
 
-  long long res = 0;
-  long long two_factor = 1;
+  ll res = 0;
+  ll two_factor = 1;
   for (int d = 0; d < 60; ++d) {
-    long long even = 0, odd = 0;
-    for (int i = 0; i < N; ++i) {
-      if (A[i] & (1LL << d))
+    ll even = 0, odd = 0;
+    rep(i, n) {
+      if (a[i] & (1LL << d))
         ++odd;
       else
         ++even;
     }
-    long long add = (odd * even) % MOD * two_factor % MOD;
+    ll add = (odd * even) % MOD * two_factor % MOD;
     res = (res + add) % MOD;
     two_factor = (two_factor * 2) % MOD;
   }
