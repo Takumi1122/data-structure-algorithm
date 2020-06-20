@@ -1,25 +1,28 @@
-#include <iostream>
-#include <queue>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
 int main() {
   // 頂点数と辺数
-  int N, M;
-  cin >> N >> M;
+  int n, m;
+  cin >> n >> m;
 
   // グラフ入力受取 (ここでは無向グラフを想定)
-  Graph G(N);
-  for (int i = 0; i < M; ++i) {
+  Graph G(n);
+  rep(i, m) {
     int a, b;
     cin >> a >> b;
+    a--;
+    b--;
     G[a].push_back(b);
     G[b].push_back(a);
   }
 
   // BFS のためのデータ構造
-  vector<int> dist(N, -1);  // 全頂点を「未訪問」に初期化
+  vector<int> dist(n, -1);  // 全頂点を「未訪問」に初期化
   queue<int> que;
 
   // 初期条件 (頂点 0 を初期ノードとする)
@@ -42,5 +45,5 @@ int main() {
   }
 
   // 結果出力 (各頂点の頂点 0 からの距離を見る)
-  for (int v = 0; v < N; ++v) cout << v << ": " << dist[v] << endl;
+  rep(i, n) cout << i << ": " << dist[i] << endl;
 }
