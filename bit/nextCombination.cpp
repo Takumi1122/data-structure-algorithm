@@ -1,6 +1,8 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 /* next combination */
 int next_combination(int sub) {
@@ -18,18 +20,16 @@ int main() {
 
     /* きちんとできていることを確認してみる */
     // bit の表す集合を求める
-    vector<int> S;
-    for (int i = 0; i < n; ++i) {
+    vector<int> s;
+    rep(i, n) {
       if (bit & (1 << i)) {  // i が bit に入るかどうか
-        S.push_back(i);
+        s.push_back(i);
       }
     }
 
     // bit の表す集合の出力
     cout << bit << ": {";
-    for (int i = 0; i < (int)S.size(); ++i) {
-      cout << S[i] << " ";
-    }
+    rep(i, s.size()) { cout << s[i] << " "; }
     cout << "}" << endl;
   }
 }

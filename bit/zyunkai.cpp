@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+// o(n^2 * 2^n) 巡回セールスマン問題　bitDP
+
 const int INF = 100000000;  // 十分大きな値
 
 /* 入力 */
