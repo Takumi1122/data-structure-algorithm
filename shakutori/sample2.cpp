@@ -1,34 +1,39 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 int main() {
-  /* 入力受け取り */
-  int n, Q;
-  cin >> n >> Q;
-  vector<long long> a(n);
-  for (int i = 0; i < n; ++i) cin >> a[i];
+  /* クエリ回数 */
+  int q;
+  cin >> q;
 
-  /* Q 回分のクエリを処理 */
-  for (int j = 0; j < Q; ++j) {
-    long long x;
-    cin >> x;  // 各クエリ x
+  rep(query, q) {
+    /* 入力受け取り */
+    int n;
+    cin >> n;
+    ll x;
+    cin >> x;
+    vector<ll> a(n);
+    rep(i, n) cin >> a[i];
 
-    /* 合計値 */
-    long long res = 0;
+    /* 区間の長さの最小値 */
+    int res = n + 1;  // 上界を入れておく
 
     /* 区間の左端 left で場合分け */
-    int right = 0;      // 毎回 right を使い回すようにする
-    long long sum = 0;  // sum も使い回す
-    for (int left = 0; left < n; ++left) {
-      /* sum に a[right] を加えても大丈夫なら right を動かす */
-      while (right < n && sum + a[right] <= x) {
+    int right = 0;
+    ll sum = 0;
+    rep(left, n) {
+      /* [left, right) の総和が x 以上となる最小の right を求める */
+      while (right < n && sum < x) {
         sum += a[right];
         ++right;
       }
 
-      /* break した状態で right は条件を満たす最大 */
-      res += (right - left);
+      /* 更新 */
+      if (sum < x) break;  // これ以上 left を進めてもダメ
+      res = min(res, right - left);
 
       /* left をインクリメントする準備 */
       if (right == left)
@@ -38,6 +43,10 @@ int main() {
                          // を引く
     }
 
-    cout << res << endl;
+    /* res = n+1 のときは解なし */
+    if (res < n + 1)
+      cout << res << endl;
+    else
+      cout << 0 << endl;
   }
 }
