@@ -1,6 +1,8 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
 // 深さ優先探索
@@ -17,19 +19,23 @@ void dfs(const Graph &G, int v) {
 
 int main() {
   // 頂点数と辺数、s と t
-  int N, M, s, t;
-  cin >> N >> M >> s >> t;
+  int n, m, s, t;
+  cin >> n >> m >> s >> t;
 
   // グラフ入力受取
-  Graph G(N);
-  for (int i = 0; i < M; ++i) {
+  Graph G(n);
+  rep(i, m) {
     int a, b;
     cin >> a >> b;
+    a--;
+    b--;
     G[a].push_back(b);
   }
+  s--;
+  t--;
 
   // 頂点 s をスタートとした探索
-  seen.assign(N, false);  // 全頂点を「未訪問」に初期化
+  seen.assign(n, false);  // 全頂点を「未訪問」に初期化
   dfs(G, s);
 
   // t に辿り着けるかどうか

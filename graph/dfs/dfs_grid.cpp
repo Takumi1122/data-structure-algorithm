@@ -1,8 +1,9 @@
-#include <cstring>
-#include <iostream>
-#include <string>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+using Graph = vector<vector<int>>;
 
 // 四方向への移動ベクトル
 const int dx[4] = {1, 0, -1, 0};
@@ -38,12 +39,12 @@ int main() {
   // 入力受け取り
   cin >> H >> W;
   field.resize(H);
-  for (int h = 0; h < H; ++h) cin >> field[h];
+  rep(h, H) cin >> field[h];
 
   // s と g のマスを特定する
   int sh, sw, gh, gw;
-  for (int h = 0; h < H; ++h) {
-    for (int w = 0; w < W; ++w) {
+  rep(h, H) {
+    rep(w, W) {
       if (field[h][w] == 's') sh = h, sw = w;
       if (field[h][w] == 'g') gh = h, gw = w;
     }

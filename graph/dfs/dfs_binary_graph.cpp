@@ -1,6 +1,8 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
 // 二部グラフ判定
@@ -22,22 +24,24 @@ bool dfs(const Graph &G, int v, int cur = 0) {
 
 int main() {
   // 頂点数と辺数
-  int N, M;
-  cin >> N >> M;
+  int n, m;
+  cin >> n >> m;
 
   // グラフ入力受取
-  Graph G(N);
-  for (int i = 0; i < M; ++i) {
+  Graph G(n);
+  rep(i, m) {
     int a, b;
     cin >> a >> b;
+    a--;
+    b--;
     G[a].push_back(b);
     G[b].push_back(a);
   }
 
   // 探索
-  color.assign(N, -1);
+  color.assign(n, -1);
   bool is_bipartite = true;
-  for (int v = 0; v < N; ++v) {
+  rep(v, n) {
     if (color[v] != -1) continue;  // v が探索済みだったらスルー
     if (!dfs(G, v)) is_bipartite = false;
   }
