@@ -1,7 +1,10 @@
-#include <algorithm>
-#include <cstring>
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
+// o(n * A) 最小個数部分和問題
 
 const int INF =
     1 << 29;  // 十分大きい値にする, INT_MAX にしないのはオーバーフロー対策
@@ -15,11 +18,10 @@ int dp[110][10010];
 
 int main() {
   cin >> n >> A;
-  for (int i = 0; i < n; ++i) cin >> a[i];
+  rep(i, n) cin >> a[i];
 
   // 一旦すべて INF に
-  for (int i = 0; i < 110; ++i)
-    for (int j = 0; j < 10010; ++j) dp[i][j] = INF;
+  rep(i, 110) rep(j, 10010) dp[i][j] = INF;
   dp[0][0] = 0;  // dp[0][0] だけ 0 に
 
   for (int i = 0; i < n; ++i) {

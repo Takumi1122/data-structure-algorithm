@@ -1,7 +1,10 @@
-#include <algorithm>
-#include <climits>
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
+// o(n * W) ナップサック問題
 
 // 入力
 int n, W;
@@ -12,7 +15,7 @@ int dp[110][10010];
 
 int main() {
   cin >> n >> W;
-  for (int i = 0; i < n; ++i) cin >> value[i] >> weight[i];
+  rep(i, n) cin >> value[i] >> weight[i];
 
   // DP初期条件: dp[0][w] = 0
   for (int w = 0; w <= W; ++w) dp[0][w] = 0;

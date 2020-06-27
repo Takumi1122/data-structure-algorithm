@@ -1,11 +1,10 @@
-#include <algorithm>
-#include <cmath>
-#include <cstring>
-#include <iostream>
-#include <queue>
-#include <utility>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
+// 個数制限付き部分和問題
 
 int main() {
   int n, m;
@@ -19,8 +18,8 @@ int main() {
     cin >> n >> m;
     if (!(n | m)) return 0;
 
-    for (int i = 0; i < n; i++) cin >> a[i];
-    for (int i = 0; i < n; i++) cin >> c[i];
+    rep(i, n) cin >> a[i];
+    rep(i, n) cin >> c[i];
 
     // 計算
     memset(dp, -1, sizeof(dp));

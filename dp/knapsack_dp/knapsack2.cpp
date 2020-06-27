@@ -1,5 +1,11 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
+// o(n^2 * V) ナップサック問題
+
 template <class T>
 inline bool chmax(T& a, T b) {
   if (a < b) {
@@ -16,32 +22,32 @@ inline bool chmin(T& a, T b) {
   }
   return false;
 }
-const long long INF = 1LL << 60;
+
+const ll INF = 1LL << 60;
 
 const int MAX_N = 110;
 const int MAX_V = 100100;
 
 // 入力
-int N;
-long long W, weight[MAX_N],
+int n;
+ll W, weight[MAX_N],
     value[MAX_N];  // 品物の個数は 100 個なので少し余裕持たせてサイズ 110 に
 
 // DPテーブル
-long long dp[MAX_N][MAX_V];
+ll dp[MAX_N][MAX_V];
 
 int main() {
-  cin >> N >> W;
-  for (int i = 0; i < N; ++i) cin >> weight[i] >> value[i];
+  cin >> n >> W;
+  rep(i, n) cin >> weight[i] >> value[i];
 
   // 初期化
-  for (int i = 0; i < MAX_N; ++i)
-    for (int j = 0; j < MAX_V; ++j) dp[i][j] = INF;
+  rep(i, MAX_N) rep(j, MAX_V) dp[i][j] = INF;
 
   // 初期条件
   dp[0][0] = 0;
 
   // DPループ
-  for (int i = 0; i < N; ++i) {
+  for (int i = 0; i < n; ++i) {
     for (int sum_v = 0; sum_v < MAX_V; ++sum_v) {
       // i 番目の品物を選ぶ場合
       if (sum_v - value[i] >= 0)
@@ -53,9 +59,9 @@ int main() {
   }
 
   // 最適値の出力
-  long long res = 0;
-  for (int sum_v = 0; sum_v < MAX_V; ++sum_v) {
-    if (dp[N][sum_v] <= W) res = sum_v;
+  ll res = 0;
+  rep(sum_v, MAX_V) {
+    if (dp[n][sum_v] <= W) res = sum_v;
   }
   cout << res << endl;
 }
