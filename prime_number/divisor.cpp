@@ -1,15 +1,18 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-vector<long long> enum_divisors(long long N) {
-  vector<long long> res;
-  for (long long i = 1; i * i <= N; ++i) {
-    if (N % i == 0) {
+// 約数列挙 o(√n)
+
+vector<ll> enum_divisors(ll n) {
+  vector<ll> res;
+  for (ll i = 1; i * i <= n; ++i) {
+    if (n % i == 0) {
       res.push_back(i);
       // 重複しないならば i の相方である N/i も push
-      if (N / i != i) res.push_back(N / i);
+      if (n / i != i) res.push_back(n / i);
     }
   }
   // 小さい順に並び替える
@@ -18,9 +21,9 @@ vector<long long> enum_divisors(long long N) {
 }
 
 int main() {
-  long long N;
-  cin >> N;
-  const auto &res = enum_divisors(N);
-  for (int i = 0; i < res.size(); ++i) cout << res[i] << " ";
+  ll n;
+  cin >> n;
+  const auto &res = enum_divisors(n);
+  rep(i, res.size()) cout << res[i] << " ";
   cout << endl;
 }

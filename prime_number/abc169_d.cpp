@@ -1,10 +1,13 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 // 素因数分解
-vector<pair<long long, long long> > prime_factorize(long long n) {
-  vector<pair<long long, long long> > res;
-  for (long long p = 2; p * p <= n; ++p) {
+vector<pair<ll, ll> > prime_factorize(ll n) {
+  vector<pair<ll, ll> > res;
+  for (ll p = 2; p * p <= n; ++p) {
     if (n % p != 0) continue;
     int num = 0;
     while (n % p == 0) {
@@ -18,13 +21,13 @@ vector<pair<long long, long long> > prime_factorize(long long n) {
 }
 
 int main() {
-  long long N;
-  cin >> N;
-  auto pf = prime_factorize(N);
-  long long res = 0;
+  ll n;
+  cin >> n;
+  auto pf = prime_factorize(n);
+  ll res = 0;
   for (auto p : pf) {
-    long long e = p.second;
-    long long tmp = 0, cur = 1;
+    ll e = p.second;
+    ll tmp = 0, cur = 1;
     while (e >= cur) e -= cur++, ++tmp;
     res += tmp;
   }
