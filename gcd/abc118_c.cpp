@@ -1,21 +1,24 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-long long GCD(long long a, long long b) {
+ll gcd(ll a, ll b) {
   if (b == 0)
     return a;
   else
-    return GCD(b, a % b);
+    return gcd(b, a % b);
 }
 
 int main() {
-  long long N;
-  cin >> N;
-  long long g = 0;
-  for (int i = 0; i < N; ++i) {
-    long long a;
+  ll n;
+  cin >> n;
+  ll g = 0;
+  rep(i, n) {
+    ll a;
     cin >> a;
-    g = GCD(g, a);
+    g = gcd(g, a);
   }
   cout << g << endl;
 }

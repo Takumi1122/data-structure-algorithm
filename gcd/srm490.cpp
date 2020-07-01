@@ -1,19 +1,22 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-long long GCD(long long a, long long b) {
+ll gcd(ll a, ll b) {
   if (b == 0)
     return a;
   else
-    return GCD(b, a % b);
+    return gcd(b, a % b);
 }
 
 class Starport {
  public:
-  double getExpectedTime(long long N, long long M) {
-    long long g = GCD(N, M);
-    N /= g;
-    M /= g;
-    return (double)(N - 1) * g / 2;
+  double getExpectedTime(ll n, ll m) {
+    ll g = gcd(n, m);
+    n /= g;
+    m /= g;
+    return (double)(n - 1) * g / 2;
   }
 };

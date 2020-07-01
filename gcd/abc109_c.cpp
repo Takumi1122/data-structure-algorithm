@@ -1,23 +1,28 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-long long GCD(long long a, long long b) {
+// o(n * log(n)) 最大公約数はo(log(n))
+
+ll gcd(ll a, ll b) {
   if (b == 0)
     return a;
   else
-    return GCD(b, a % b);
+    return gcd(b, a % b);
 }
 
 int main() {
-  int N;
-  cin >> N;
-  long long X;
-  cin >> X;
-  long long res = 0;
-  for (int i = 0; i < N; ++i) {
-    long long x;
-    cin >> x;
-    res = GCD(res, abs(x - X));
+  int n;
+  cin >> n;
+  ll x;
+  cin >> x;
+  ll res = 0;
+  rep(i, n) {
+    ll xi;
+    cin >> xi;
+    res = gcd(res, abs(xi - x));
   }
   cout << res << endl;
 }
