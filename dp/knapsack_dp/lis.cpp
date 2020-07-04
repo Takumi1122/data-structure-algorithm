@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 #define MAX 100000
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 // o(nlogn)
 
@@ -23,9 +26,7 @@ int lis() {
 
 int main() {
   cin >> n;
-  for (int i = 0; i < n; i++) {
-    cin >> A[i];
-  }
+  rep(i, n) cin >> A[i];
 
   cout << lis() << endl;
 
