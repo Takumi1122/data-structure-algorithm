@@ -1,5 +1,9 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
 static const int MAX = 100;
 static const int INFTY = (1 << 21);
 static const int WHITE = 0;
@@ -14,7 +18,7 @@ void dijkstra() {
   int minv;
   int d[MAX], color[MAX];
 
-  for (int i = 0; i < n; i++) {
+  rep(i, n) {
     d[i] = INFTY;
     color[i] = WHITE;
   }
@@ -24,7 +28,7 @@ void dijkstra() {
   while (1) {
     minv = INFTY;
     int u = -1;
-    for (int i = 0; i < n; i++) {
+    rep(i, n) {
       if (minv > d[i] && color[i] != BLACK) {
         u = i;
         minv = d[i];
@@ -32,7 +36,8 @@ void dijkstra() {
     }
     if (u == -1) break;
     color[u] = BLACK;
-    for (int v = 0; v < n; v++) {
+
+    rep(v, n) {
       if (color[v] != BLACK && M[u][v] != INFTY) {
         if (d[v] > d[u] + M[u][v]) {
           d[v] = d[u] + M[u][v];
@@ -41,23 +46,23 @@ void dijkstra() {
       }
     }
   }
-  for (int i = 0; i < n; i++) {
-    cout << i << " " << (d[i] == INFTY ? -1 : d[i]) << endl;
-  }
+
+  rep(i, n) cout << i << " " << (d[i] == INFTY ? -1 : d[i]) << endl;
 }
 
 int main() {
   cin >> n;
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      M[i][j] = INFTY;
-    }
-  }
+  rep(i, n) rep(j, n) M[i][j] = INFTY;
 
   int k, c, u, v;
-  for (int i = 0; i < n; i++) {
+  // u: 頂点の番号
+  // k: uの出次数
+  // v: uに隣接する頂点の番号
+  // c: uとvをつなぐ有向辺の重み
+
+  rep(i, n) {
     cin >> u >> k;
-    for (int j = 0; j < k; j++) {
+    rep(j, k) {
       cin >> v >> c;
       M[u][v] = c;
     }
