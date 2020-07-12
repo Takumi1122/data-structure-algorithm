@@ -1,5 +1,9 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
 static const int MAX = 100;
 static const int INFTY = (1 << 21);
 static const int WHITE = 0;
@@ -7,14 +11,21 @@ static const int GRAY = 1;
 static const int BLACK = 2;
 
 // o(|v|^2)
+// 最小全域木: グラフの全域木のなかで、辺の重みの総和が最小のもの
+// 木は閉路がない
+// 全域木は頂点を全て含む木
 
+// n: 頂点数
+// M: 隣接行列
 int n, M[MAX][MAX];
 
 int prim() {
   int u, minv;
+
+  // p[v] 頂点vの親
   int d[MAX], p[MAX], color[MAX];
 
-  for (int i = 0; i < n; i++) {
+  rep(i, n) {
     d[i] = INFTY;
     p[i] = -1;
     color[i] = WHITE;
@@ -25,7 +36,7 @@ int prim() {
   while (1) {
     minv = INFTY;
     u = -1;
-    for (int i = 0; i < n; i++) {
+    rep(i, n) {
       if (minv > d[i] && color[i] != BLACK) {
         u = i;
         minv = d[i];
@@ -33,7 +44,7 @@ int prim() {
     }
     if (u == -1) break;
     color[u] = BLACK;
-    for (int v = 0; v < n; v++) {
+    rep(v, n) {
       if (color[v] != BLACK && M[u][v] != INFTY) {
         if (d[v] > M[u][v]) {
           d[v] = M[u][v];
@@ -44,7 +55,7 @@ int prim() {
     }
   }
   int sum = 0;
-  for (int i = 0; i < n; i++) {
+  rep(i, n) {
     if (p[i] != -1) sum += M[i][p[i]];
   }
 
@@ -54,8 +65,8 @@ int prim() {
 int main() {
   cin >> n;
 
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
+  rep(i, n) {
+    rep(j, n) {
       int e;
       cin >> e;
       M[i][j] = (e == -1) ? INFTY : e;

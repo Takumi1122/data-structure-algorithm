@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
 #define MAX 10000
 #define INFTY (1 << 29)
 
@@ -7,13 +11,14 @@ using namespace std;
 
 class DisjointSet {
  public:
+  // rank[x] ノードxを根としたときの木の高さ
   vector<int> rank, p;
 
   DisjointSet() {}
   DisjointSet(int size) {
     rank.resize(size, 0);
     p.resize(size, 0);
-    for (int i = 0; i < size; i++) makeSet(i);
+    rep(i, size) makeSet(i);
   }
 
   void makeSet(int x) {
@@ -52,16 +57,16 @@ class Edge {
   bool operator<(const Edge &e) const { return cost < e.cost; }
 };
 
-int kruskal(int N, vector<Edge> edges) {
+int kruskal(int n, vector<Edge> edges) {
   int totalCost = 0;
   sort(edges.begin(), edges.end());
 
-  DisjointSet dset = DisjointSet(N + 1);
+  DisjointSet dset = DisjointSet(n + 1);
 
-  for (int i = 0; i < N; i++) dset.makeSet(i);
+  rep(i, n) dset.makeSet(i);
 
   int source, target;
-  for (int i = 0; i < edges.size(); i++) {
+  rep(i, edges.size()) {
     Edge e = edges[i];
     if (!dset.same(e.source, e.target)) {
       totalCost += e.cost;
@@ -72,16 +77,18 @@ int kruskal(int N, vector<Edge> edges) {
 }
 
 int main() {
-  int N, M, cost;
+  // n: 頂点数
+  // m: 辺の数
+  int n, m, cost;
   int source, target;
 
-  cin >> N >> M;
+  cin >> n >> m;
 
   vector<Edge> edges;
-  for (int i = 0; i < M; i++) {
+  rep(i, m) {
     cin >> source >> target >> cost;
     edges.push_back(Edge(source, target, cost));
   }
 
-  cout << kruskal(N, edges) << endl;
+  cout << kruskal(n, edges) << endl;
 }
