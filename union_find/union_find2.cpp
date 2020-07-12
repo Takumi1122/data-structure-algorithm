@@ -1,7 +1,8 @@
-#include <iostream>
-#include <vector>
-
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 class DisjointSet {
  public:
@@ -11,7 +12,7 @@ class DisjointSet {
   DisjointSet(int size) {
     rank.resize(size, 0);
     p.resize(size, 0);
-    for (int i = 0; i < size; i++) makeSet(i);
+    rep(i, size) makeSet(i);
   }
 
   void makeSet(int x) {
@@ -49,7 +50,7 @@ int main() {
   cin >> n >> q;
   DisjointSet ds = DisjointSet(n);
 
-  for (int i = 0; i < q; i++) {
+  rep(i, q) {
     cin >> t >> a >> b;
     if (t == 0)
       ds.unite(a, b);

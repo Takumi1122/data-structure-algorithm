@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 struct UnionFind {
   vector<int> par;  // par[i]:iの親の番号　(例) par[3] = 2 : 3の親が2
 
-  UnionFind(int N) : par(N) {  //最初は全てが根であるとして初期化
-    for (int i = 0; i < N; i++) par[i] = i;
+  UnionFind(int n) : par(n) {  //最初は全てが根であるとして初期化
+    rep(i, n) par[i] = i;
   }
 
   int root(int x) {  // データxが属する木の根を再帰で得る：root(x) = {xの木の根}
