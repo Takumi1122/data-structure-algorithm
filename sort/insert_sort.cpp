@@ -1,18 +1,22 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
+// 挿入ソート o(n^2) 安定ソート○　内部ソート○
 
 int main() {
   int n;  // 要素数
   cin >> n;
   vector<int> a(n);  // 整列したい配列ベクトル (サイズ を n に初期化)
-  for (int i = 0; i < n; i++) {
+  rep(i, n) {
     cin >> a[i];  // 整列したい配列を取得
   }
 
   /* 挿入前の配列を出力してみる */
   cout << "Before: ";
-  for (int i = 0; i < n; i++) cout << a[i] << " ";
+  rep(i, n) cout << a[i] << " ";
   cout << endl;
 
   /* 挿入ソート */
@@ -31,7 +35,7 @@ int main() {
 
     /* 各ステップの配列を出力してみる */
     cout << "After Step " << i << ": ";
-    for (int i = 0; i < n; i++) cout << a[i] << " ";
+    rep(i, n) cout << a[i] << " ";
     cout << endl;
   }
 

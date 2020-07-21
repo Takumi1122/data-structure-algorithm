@@ -1,17 +1,21 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
+// マージソート o(n * log(n)) 安定ソート○　内部ソート×
 
 /* 配列 a の [left, right) をソートします */
-void MergeSort(vector<int> &a, int left, int right) {
+void mergeSort(vector<int> &a, int left, int right) {
   if (right - left == 1) return;
   int mid = left + (right - left) / 2;
 
   // 左半分 [left, mid) をソート
-  MergeSort(a, left, mid);
+  mergeSort(a, left, mid);
 
   // 右半分 [mid, right) をソート
-  MergeSort(a, mid, right);
+  mergeSort(a, mid, right);
 
   // 一旦「左」と「右」のソート結果をコピーしておく (右側は左右反転)
   vector<int> buf;
@@ -37,14 +41,14 @@ int main() {
   int n;  // 要素数
   cin >> n;
   vector<int> a(n);  // 整列したい配列ベクトル (サイズ を n に初期化)
-  for (int i = 0; i < n; i++) {
+  rep(i, n) {
     cin >> a[i];  // 整列したい配列を取得
   }
 
   /* マージソート */
-  MergeSort(a, 0, n);
+  mergeSort(a, 0, n);
 
-  for (int i = 0; i < n; i++) cout << a[i] << " ";
+  rep(i, n) cout << a[i] << " ";
   cout << endl;
 
   return 0;
