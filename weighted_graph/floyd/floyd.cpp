@@ -1,22 +1,22 @@
-#include <algorithm>
-#include <climits>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 // o(|V|^3)
 
-static const int MAX = 100;
-static const long long INFTY = (1LL << 32);
+static const int MAX = 300;
+static const ll INFTY = (1LL << 32);
 
 int n;
-long long d[MAX][MAX];
+ll d[MAX][MAX];
 
 void floyd() {
-  for (int k = 0; k < n; k++) {
-    for (int i = 0; i < n; i++) {
+  rep(k, n) {
+    rep(i, n) {
       if (d[i][k] == INFTY) continue;
-      for (int j = 0; j < n; j++) {
+      rep(j, n) {
         if (d[k][j] == INFTY) continue;
         d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
       }
@@ -28,13 +28,9 @@ int main() {
   int e, u, v, c;
   cin >> n >> e;
 
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      d[i][j] = ((i == j) ? 0 : INFTY);
-    }
-  }
+  rep(i, n) rep(j, n) d[i][j] = ((i == j) ? 0 : INFTY);
 
-  for (int i = 0; i < e; i++) {
+  rep(i, e) {
     cin >> u >> v >> c;
     d[u][v] = c;
   }
@@ -42,14 +38,13 @@ int main() {
   floyd();
 
   bool negative = false;
-  for (int i = 0; i < n; i++)
-    if (d[i][i] < 0) negative = true;
+  rep(i, n) if (d[i][i] < 0) negative = true;
 
   if (negative) {
     cout << "NEGATIVE CYCLE" << endl;
   } else {
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++) {
+    rep(i, n) {
+      rep(j, n) {
         if (j) cout << " ";
         if (d[i][j] == INFTY)
           cout << "INF";
