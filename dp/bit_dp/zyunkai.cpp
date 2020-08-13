@@ -14,6 +14,7 @@ int dist[21][21];
 
 /* メモ再帰 */
 int dp[(1 << 20) + 1][21];  // dpテーブルは余裕をもったサイズにする
+
 int rec(int bit, int v) {
   // すでに探索済みだったらリターン
   if (dp[bit][v] != -1) return dp[bit][v];
@@ -45,7 +46,6 @@ int rec(int bit, int v) {
 int main() {
   // 入力
   cin >> n;
-
   rep(i, n) rep(j, n) cin >> dist[i][j];
 
   // テーブルを全部 -1 にしておく (-1 でなかったところは探索済)
