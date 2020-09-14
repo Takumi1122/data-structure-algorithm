@@ -4,7 +4,9 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 0-index bit[0]〜bit[n-1] o(log(N))
+// 0-index bit[0]〜bit[n-1]
+// add o(log(n))
+// sum o(log(n))
 
 int N;
 int bit[1000010];

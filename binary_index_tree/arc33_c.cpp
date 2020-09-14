@@ -4,6 +4,8 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// Abel アーベル群
+
 template <class Abel>
 struct BIT {
   vector<Abel> dat;
