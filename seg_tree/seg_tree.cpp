@@ -4,22 +4,24 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-template <class T>
+// 区間上の最小値 Range Minimam Query(RMQ)
+
+template <class Monoid>
 class SegTree {
-  int n;                        // 葉の数
-  vector<T> data;               // データを格納するvector
-  T def;                        // 初期値かつ単位元
-  function<T(T, T)> operation;  // 区間クエリで使う処理
-  function<T(T, T)> update;     // 点更新で使う処理
+  int n;                                       // 葉の数
+  vector<Monoid> data;                         // データを格納するvector
+  Monoid def;                                  // 初期値かつ単位元
+  function<Monoid(Monoid, Monoid)> operation;  // 区間クエリで使う処理
+  function<Monoid(Monoid, Monoid)> update;     // 点更新で使う処理
 
   // 区間[a,b)の総和。ノードk=[l,r)に着目している。
-  T _query(int a, int b, int k, int l, int r) {
+  Monoid _query(int a, int b, int k, int l, int r) {
     if (r <= a || b <= l) return def;  // 交差しない
     if (a <= l && r <= b)
       return data[k];  // a,l,r,bの順で完全に含まれる
     else {
-      T c1 = _query(a, b, 2 * k + 1, l, (l + r) / 2);  // 左の子
-      T c2 = _query(a, b, 2 * k + 2, (l + r) / 2, r);  // 右の子
+      Monoid c1 = _query(a, b, 2 * k + 1, l, (l + r) / 2);  // 左の子
+      Monoid c2 = _query(a, b, 2 * k + 2, (l + r) / 2, r);  // 右の子
       return operation(c1, c2);
     }
   }
@@ -27,18 +29,18 @@ class SegTree {
  public:
   // _n:必要サイズ, _def:初期値かつ単位元, _operation:クエリ関数,
   // _update:更新関数
-  SegTree(size_t _n, T _def, function<T(T, T)> _operation,
-          function<T(T, T)> _update)
+  SegTree(size_t _n, Monoid _def, function<Monoid(Monoid, Monoid)> _operation,
+          function<Monoid(Monoid, Monoid)> _update)
       : def(_def), operation(_operation), update(_update) {
     n = 1;
     while (n < _n) {
       n *= 2;
     }
-    data = vector<T>(2 * n - 1, def);
+    data = vector<Monoid>(2 * n - 1, def);
   }
 
   // 場所i(0-indexed)の値をxで更新
-  void change(int i, T x) {
+  void change(int i, Monoid x) {
     i += n - 1;
     data[i] = update(data[i], x);
     while (i > 0) {
@@ -48,10 +50,10 @@ class SegTree {
   }
 
   // [a, b)の区間クエリを実行
-  T query(int a, int b) { return _query(a, b, 0, 0, n); }
+  Monoid query(int a, int b) { return _query(a, b, 0, 0, n); }
 
   // 添字でアクセス
-  T operator[](int i) { return data[i + n - 1]; }
+  Monoid operator[](int i) { return data[i + n - 1]; }
 };
 
 int main() {
