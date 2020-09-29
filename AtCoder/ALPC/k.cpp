@@ -27,7 +27,7 @@ S mapping(F l, S r) { return S{r.a * l.a + r.size * l.b, r.size}; }
 
 // sum(a + b) -> sum((a * x + y) + (b * x + y)) ->
 // sum(((a * x + y ) * z + k) + ((b * x + y) * z + k)) ->
-// sum((a + b) * z + 2(y * z + k))
+// sum((a + b) * x * z + 2(y * z + k))
 F composition(F l, F r) { return F{r.a * l.a, r.b * l.a + l.b}; }
 
 F id() { return F{1, 0}; }
