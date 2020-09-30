@@ -4,6 +4,15 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ACL Beginner Contest D - Flat Subsequence
+      https://atcoder.jp/contests/abl/tasks/abl_d
+
+    LIS でも大活躍！ DP の配列使いまわしテクニックを特集
+      https://qiita.com/drken/items/68b8503ad4ffb469624c
+*/
+
 // 抽象化したセグメント木
 template <class Monoid>
 struct SegTree {
@@ -57,33 +66,25 @@ struct SegTree {
   }
 };
 
-// 最長増加部分列の長さを求める
-int LIS(const vector<ll> &a) {
+int LIS(const vector<int> &a, int k) {
   int n = (int)a.size();
 
-  // 座標圧縮
-  vector<ll> aval;
-  rep(i, n) aval.push_back(a[i]);
-  sort(aval.begin(), aval.end());
-  aval.erase(unique(aval.begin(), aval.end()), aval.end());
-
   // セグメント木 (区間取得を max としたもの)
+  // 0 <= a[i] <=300000 なのでセグメント木について n = 300050
   SegTree<int> dp(
-      n + 1, [](int a, int b) { return max(a, b); }, 0);
+      300050, [](int a, int b) { return max(a, b); }, 0);
 
   // 更新
   int res = 0;
   rep(i, n) {
-    // a[i] が何番目か
-    int h = lower_bound(aval.begin(), aval.end(), a[i]) - aval.begin();
-    ++h;  // 1-indexed にする
-
+    int h1 = max(a[i] - k, 0);
+    int h2 = min(a[i] + k, 300040);
     // 値取得
-    int A = dp.get(0, h);
+    int A = dp.get(h1, h2 + 1);
 
     // 更新
-    if (dp.get(h, h + 1) < A + 1) {
-      dp.update(h, A + 1);
+    if (dp.get(a[i], a[i] + 1) < A + 1) {
+      dp.update(a[i], A + 1);
       res = max(res, A + 1);
     }
   }
@@ -91,9 +92,9 @@ int LIS(const vector<ll> &a) {
 }
 
 int main() {
-  int n;
-  cin >> n;
-  vector<ll> a(n);
+  int n, k;
+  cin >> n >> k;
+  vector<int> a(n);
   rep(i, n) cin >> a[i];
-  cout << LIS(a) << endl;
+  cout << LIS(a, k) << endl;
 }
