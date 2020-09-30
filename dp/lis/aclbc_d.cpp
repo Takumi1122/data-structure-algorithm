@@ -66,7 +66,7 @@ struct SegTree {
   }
 };
 
-int LIS(const vector<int> &a, int k) {
+int solve(const vector<int> &a, int k) {
   int n = (int)a.size();
 
   // セグメント木 (区間取得を max としたもの)
@@ -96,5 +96,5 @@ int main() {
   cin >> n >> k;
   vector<int> a(n);
   rep(i, n) cin >> a[i];
-  cout << LIS(a, k) << endl;
+  cout << solve(a, k) << endl;
 }
