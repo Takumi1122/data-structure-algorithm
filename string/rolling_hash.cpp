@@ -11,9 +11,9 @@ using P = pair<int, int>;
 */
 
 // ローリングハッシュ
-// 構築 o(n)
-// get o(1)
-// getLCP o(log(n))
+// 構築 O(n)
+// get O(1)
+// getLCP O(log(n))
 struct RollingHash {
   static const int base1 = 1007, base2 = 2009;
   static const int mod1 = 1000000007, mod2 = 1000000009;

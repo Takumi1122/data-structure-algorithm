@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    AIZU ONLINE JUDGE
+      https://onlinejudge.u-aizu.ac.jp/problems/ALDS1_14_D
+*/
+
 // Sparse Table
 template <class MeetSemiLattice>
 struct SparseTable {
