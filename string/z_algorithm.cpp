@@ -12,6 +12,8 @@ using P = pair<int, int>;
 
 // z-algorithm
 // O(n) の前処理で配列 lcp を求める
+// 入力の長さをnとして、長さnの配列を返す
+// i番目の要素はs[0..n)とs[i..n)のlcpの長さ
 vector<int> Zalgo(const string &S) {
   int N = (int)S.size();
   vector<int> res(N);
