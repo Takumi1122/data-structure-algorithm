@@ -4,88 +4,125 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-typedef int FLOW;            // フローを表す型、今回は int 型
-typedef int COST;            // コストを表す型、今回は int 型
-const int MAX_V = 100;       // グラフの最大ノード数
-const COST INF = 100000000;  // 十分大きい値
+// min-cost flow (primal-dual)
+// O(FElog(V))
 
-// グラフの辺の構造体
+/*
+    参考リンク
+    AIZU ONLINE JUDGE
+      https://onlinejudge.u-aizu.ac.jp/problems/GRL_6_B
+*/
+
+// edge class (for network-flow)
+template <class FLOWTYPE, class COSTTYPE>
 struct Edge {
-  int rev, from, to;
-  FLOW cap, icap;
-  COST cost;
-  Edge(int r, int f, int t, FLOW ca, COST co)
-      : rev(r), from(f), to(t), cap(ca), icap(ca), cost(co) {}
+  int rev, from, to, id;
+  FLOWTYPE cap, icap;
+  COSTTYPE cost;
+  Edge(int r, int f, int t, FLOWTYPE ca, COSTTYPE co, int id = -1)
+      : rev(r), from(f), to(t), cap(ca), icap(ca), cost(co), id(id) {}
+  friend ostream& operator<<(ostream& s, const Edge& E) {
+    if (E.cap > 0)
+      return s << E.from << "->" << E.to << '(' << E.cap << ',' << E.cost
+               << ')';
+    else
+      return s;
+  }
 };
 
-// グラフ構造体
+// graph class (for network-flow)
+template <class FLOWTYPE, class COSTTYPE>
 struct Graph {
-  int V;
-  vector<Edge> list[MAX_V];
+  vector<vector<Edge<FLOWTYPE, COSTTYPE> > > list;
 
-  Graph(int n = 0) : V(n) { rep(i, MAX_V) list[i].clear(); }
+  Graph(int n = 0) : list(n) {}
   void init(int n = 0) {
-    V = n;
-    rep(i, MAX_V) list[i].clear();
+    list.clear();
+    list.resize(n);
   }
-  void resize(int n = 0) { V = n; }
   void reset() {
-    rep(i, V) rep(j, list[i].size()) list[i][j].cap = list[i][j].icap;
+    for (int i = 0; i < (int)list.size(); ++i)
+      for (int j = 0; j < list[i].size(); ++j) list[i][j].cap = list[i][j].icap;
   }
-  inline vector<Edge> &operator[](int i) { return list[i]; }
+  inline vector<Edge<FLOWTYPE, COSTTYPE> >& operator[](int i) {
+    return list[i];
+  }
+  inline const size_t size() const { return list.size(); }
 
-  Edge &redge(Edge &e) {
+  inline Edge<FLOWTYPE, COSTTYPE>& redge(const Edge<FLOWTYPE, COSTTYPE>& e) {
     if (e.from != e.to)
       return list[e.to][e.rev];
     else
       return list[e.to][e.rev + 1];
   }
 
-  void add_edge(int from, int to, FLOW cap, COST cost) {
-    list[from].push_back(Edge((int)list[to].size(), from, to, cap, cost));
-    list[to].push_back(Edge((int)list[from].size() - 1, to, from, 0, -cost));
+  void addedge(int from, int to, FLOWTYPE cap, COSTTYPE cost, int id = -1) {
+    list[from].push_back(Edge<FLOWTYPE, COSTTYPE>((int)list[to].size(), from,
+                                                  to, cap, cost, id));
+    list[to].push_back(Edge<FLOWTYPE, COSTTYPE>((int)list[from].size() - 1, to,
+                                                from, 0, -cost));
+  }
+
+  void add_undirected_edge(int from, int to, FLOWTYPE cap, COSTTYPE cost,
+                           int id = -1) {
+    list[from].push_back(Edge<FLOWTYPE, COSTTYPE>((int)list[to].size(), from,
+                                                  to, cap, cost, id));
+    list[to].push_back(Edge<FLOWTYPE, COSTTYPE>((int)list[from].size() - 1, to,
+                                                from, cap, cost, id));
+  }
+
+  friend ostream& operator<<(ostream& s, const Graph& G) {
+    s << endl;
+    for (int i = 0; i < G.size(); ++i) {
+      s << i << ":";
+      for (auto e : G.list[i]) s << " " << e;
+      s << endl;
+    }
+    return s;
   }
 };
 
-// 最小費用流を求める関数
-COST minCostFlow(Graph &G, int s, int t, FLOW inif) {
-  COST dist[MAX_V];
-  int prevv[MAX_V];
-  int preve[MAX_V];
-
-  COST res = 0;
-  FLOW f = inif;
+// min-cost flow (by primal-dual)
+template <class FLOWTYPE, class COSTTYPE>
+COSTTYPE MinCostFlow(Graph<FLOWTYPE, COSTTYPE>& G, int s, int t, FLOWTYPE f) {
+  int n = (int)G.size();
+  vector<COSTTYPE> pot(n, 0), dist(n, -1);
+  vector<int> prevv(n), preve(n);
+  COSTTYPE res = 0;
   while (f > 0) {
-    fill(dist, dist + G.V, INF);
+    priority_queue<pair<COSTTYPE, int>, vector<pair<COSTTYPE, int> >,
+                   greater<pair<COSTTYPE, int> > >
+        que;
+    dist.assign(n, -1);
     dist[s] = 0;
-    while (true) {
-      bool update = false;
-      rep(v, G.V) {
-        if (dist[v] == INF) continue;
-        rep(i, G[v].size()) {
-          Edge &e = G[v][i];
-          if (e.cap > 0 && dist[e.to] > dist[v] + e.cost) {
-            dist[e.to] = dist[v] + e.cost;
-            prevv[e.to] = v;
-            preve[e.to] = i;
-            update = true;
-          }
+    que.push(make_pair(0, s));
+    while (!que.empty()) {
+      pair<COSTTYPE, int> p = que.top();
+      que.pop();
+      int v = p.second;
+      if (dist[v] < p.first) continue;
+      for (int i = 0; i < G[v].size(); ++i) {
+        auto e = G[v][i];
+        if (e.cap > 0 && (dist[e.to] < 0 ||
+                          dist[e.to] > dist[v] + e.cost + pot[v] - pot[e.to])) {
+          dist[e.to] = dist[v] + e.cost + pot[v] - pot[e.to];
+          prevv[e.to] = v;
+          preve[e.to] = i;
+          que.push(make_pair(dist[e.to], e.to));
         }
       }
-      if (!update) break;
     }
-
-    if (dist[t] == INF) return 0;
-
-    FLOW d = f;
+    if (dist[t] < 0) return -1;
+    for (int v = 0; v < n; ++v) pot[v] += dist[v];
+    FLOWTYPE d = f;
     for (int v = t; v != s; v = prevv[v]) {
       d = min(d, G[prevv[v]][preve[v]].cap);
     }
     f -= d;
-    res += dist[t] * d;
+    res += pot[t] * d;
     for (int v = t; v != s; v = prevv[v]) {
-      Edge &e = G[prevv[v]][preve[v]];
-      Edge &re = G.redge(e);
+      Edge<FLOWTYPE, COSTTYPE>& e = G[prevv[v]][preve[v]];
+      Edge<FLOWTYPE, COSTTYPE>& re = G.redge(e);
       e.cap -= d;
       re.cap += d;
     }
@@ -94,60 +131,14 @@ COST minCostFlow(Graph &G, int s, int t, FLOW inif) {
 }
 
 int main() {
-  char workers[5] = {'A', 'B', 'C', 'D', 'E'};
-  int jobs[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-
-  // 従業員数と、仕事数
-  int NUM_WORKER = 0, NUM_JOB = 0;
-  cin >> NUM_WORKER >> NUM_JOB;
-
-  // グラフの定義 (ノード数を引数に)
-  Graph G(NUM_WORKER + NUM_JOB + 2);  // +2 は S, T の分
-
-  // スーパーノード S, T の index
-  int S_node = NUM_WORKER + NUM_JOB;
-  int T_node = NUM_WORKER + NUM_JOB + 1;
-
-  // グラフに枝を張っていく
-  rep(i, NUM_WORKER) {
-    rep(j, NUM_JOB) {
-      int gain;
-      cin >> gain;
-
-      // 従業員 i から、仕事 j (index は j+NUM_WORKER) へと、容量 1, コスト
-      // -gain の枝を張る
-      G.add_edge(i, j + NUM_WORKER, 1, -gain);
-    }
+  int V, E, F;
+  cin >> V >> E >> F;
+  Graph<int, int> G(V);
+  rep(i, E) {
+    int u, v, cap, cost;
+    cin >> u >> v >> cap >> cost;
+    G.addedge(u, v, cap, cost);
   }
-
-  rep(i, NUM_WORKER) {
-    // S から従業員 i へと、容量 2, コスト 0 の枝を張る
-    G.add_edge(S_node, i, 2, 0);
-  }
-
-  rep(j, NUM_JOB) {
-    // 仕事 j から T へと、容量 1, コスト 0 の枝を張る
-    G.add_edge(j + NUM_WORKER, T_node, 1, 0);
-  }
-
-  // 最小費用流を求める
-  COST res = minCostFlow(G, S_node, T_node, NUM_JOB);
-
-  // 出力
-  cout << "Max Gain: " << -res << endl;
-
-  // 誰がどの仕事に割当てられたかを出力する
-  rep(i, NUM_WORKER) {
-    for (auto e : G[i]) {
-      // 元々の容量 (e.icap) が 1 で、フローが流れて容量 (e.cap) が 0
-      // になった部分が割り当てられたところ
-      if (e.icap == 1 && e.cap == 0) {
-        cout << "Worker " << workers[i] << " and "
-             << "Job " << jobs[e.to - NUM_WORKER]
-             << " are matched (gain: " << -e.cost << ")" << endl;
-      }
-    }
-  }
-
-  return 0;
+  int s = 0, t = V - 1;
+  cout << MinCostFlow(G, s, t, F) << endl;
 }
