@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 約数の個数 O(√n)
+// 約数の総和 O(√n)
 
 vector<pair<ll, ll> > prime_factorize(ll n) {
   vector<pair<ll, ll> > res;
@@ -26,6 +26,12 @@ int main() {
   cin >> n;
   const auto &pf = prime_factorize(n);
   ll res = 1;
-  for (auto p : pf) res *= p.second + 1;
+  for (auto p : pf) {
+    ll sum = 0;
+    for (ll i = 0; i <= p.second; i++) {
+      sum += pow(p.first, i);
+    }
+    res *= sum;
+  }
   cout << res << endl;
 }

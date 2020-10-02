@@ -4,6 +4,15 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// O(max(√a, √b))
+// 公約数とは、最大公約数の約数
+
+/*
+    参考リンク
+    ABC 142 D - Disjoint Set of Common Divisors
+      https://atcoder.jp/contests/abc142/tasks/abc142_d
+*/
+
 // 最大公約数を求める
 ll gcd(ll x, ll y) { return y ? gcd(y, x % y) : x; }
 

@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 素因数分解　o(√n)
+// 素因数分解　O(√n)
 
 vector<pair<ll, ll> > prime_factorize(ll n) {
   vector<pair<ll, ll> > res;

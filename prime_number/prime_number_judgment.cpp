@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 素数判定 o(√n)
+// 素数判定 O(√n)
 
 bool is_prime(ll n) {
   if (n == 1) return false;

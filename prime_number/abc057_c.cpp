@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 057 C - Digits in Multiplication
+      https://atcoder.jp/contests/abc057/tasks/abc057_c
+*/
+
 int calc_digit(ll n) {
   int res = 0;
   while (n) {

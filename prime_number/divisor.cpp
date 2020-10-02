@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 約数列挙 o(√n)
+// 約数列挙 O(√n)
 
 vector<ll> enum_divisors(ll n) {
   vector<ll> res;

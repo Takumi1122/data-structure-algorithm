@@ -4,6 +4,14 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 素数をなるべく均等に分配 O(√p)
+
+/*
+    参考リンク
+    CADDi 2018 C - Product and GCD
+      https://atcoder.jp/contests/caddi2018/tasks/caddi2018_a
+*/
+
 vector<pair<ll, ll> > prime_factorize(ll n) {
   vector<pair<ll, ll> > res;
   for (ll a = 2; a * a <= n; ++a) {

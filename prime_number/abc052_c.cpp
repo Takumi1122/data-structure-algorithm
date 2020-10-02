@@ -4,7 +4,13 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// n!の約数個数　o(n * √n)
+// n!の約数個数　O(n * √n)
+
+/*
+    参考リンク
+    ABC 052 C - Factors of Factorial
+      https://atcoder.jp/contests/abc052/tasks/arc067_a
+*/
 
 vector<pair<ll, ll> > prime_factorize(ll n) {
   vector<pair<ll, ll> > res;

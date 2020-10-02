@@ -6,9 +6,16 @@ using P = pair<int, int>;
 
 // n <= 10^7
 
+/*
+    参考リンク
+    ABC 172 D - Sum of Divisors
+      https://atcoder.jp/contests/abc172/tasks/abc172_d
+*/
+
 int main() {
   int n;
   cin >> n;
+  // yaku[i]: 整数iの約数の個数
   vector<ll> yaku(n + 1, 1);
   for (int i = 2; i <= n; i++) {
     yaku[i]++;

@@ -4,7 +4,10 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-//　オイラー関数値
+// オイラー関数値 O(√n)
+// 正の整数Nが与えられたとき、1,2,…,Nのうち
+// Nと互いに素であるものの個数をφ(N)と表します。これをオイラー関数とよびます。
+// φ(N) = N((p1 - 1) / p1)((p2 - 1) / p2)...((pk - 1) / pk)
 
 vector<pair<ll, ll> > prime_factorize(ll n) {
   vector<pair<ll, ll> > res;

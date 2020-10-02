@@ -4,7 +4,13 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n * log(n))
+// O(n * log(n))
+
+/*
+    参考リンク
+    ABC 150 D - Semi Common Multiple
+      https://atcoder.jp/contests/abc150/tasks/abc150_d
+*/
 
 ll gcd(ll x, ll y) {
   if (y == 0)

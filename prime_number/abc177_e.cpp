@@ -4,6 +4,14 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// coprime 互いに素
+
+/*
+    参考リンク
+    ABC 177 E - Coprime
+      https://atcoder.jp/contests/abc177/tasks/abc177_e
+*/
+
 const int A = 1000005;
 
 int main() {
