@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 152 E - Flatten
+      https://atcoder.jp/contests/abc152/tasks/abc152_e
+*/
+
 const int mod = 1000000007;
 struct mint {
   ll x;  // typedef long long ll;
@@ -50,7 +56,8 @@ struct mint {
   }
 };
 
-// エラトステネスの篩 o(n*loglog(n))
+// エラトステネスの篩 O(n*loglog(n))
+// n以下の素数を全て見つけ出す高速な方法
 struct Sieve {
   int n;
   vector<int> f, primes;
