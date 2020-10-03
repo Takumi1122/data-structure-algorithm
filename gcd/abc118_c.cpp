@@ -4,6 +4,17 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    gcd(a, m) = gcd(b, m) (a ≡ b (mod m))
+    gcd(a, m) = gcd(a - m, m)
+*/
+
+/*
+    参考リンク
+    ABC 118 C - Monsters Battle Royale
+      https://atcoder.jp/contests/abc118/tasks/abc118_c
+*/
+
 ll gcd(ll a, ll b) {
   if (b == 0)
     return a;

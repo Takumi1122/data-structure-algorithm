@@ -4,7 +4,20 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n * log(n)) 最大公約数はo(log(n))
+// O(n * log(n))
+// 最大公約数はO(log(a)) a < b の場合
+
+/*
+    3 個以上の値の最大公約数を求める
+    ・res = 0 と初期化
+    ・各iに対して res = gcd(res, x[i]) と更新する
+*/
+
+/*
+    参考リンク
+    ABC 109 C - Skip
+      https://atcoder.jp/contests/abc109/tasks/abc109_c
+*/
 
 ll gcd(ll a, ll b) {
   if (b == 0)

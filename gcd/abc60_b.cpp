@@ -4,6 +4,18 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    // べズーの等式
+    整数Nが整数 x,yを用いてax+byの形に表せる必要十分条件は、
+    Nがgcd(a,b)の倍数であることである
+*/
+
+/*
+    参考リンク
+    ABC 060 B - Choose Integers
+      https://atcoder.jp/contests/abc060/tasks/abc060_b
+*/
+
 ll gcd(ll a, ll b) {
   if (b == 0)
     return a;

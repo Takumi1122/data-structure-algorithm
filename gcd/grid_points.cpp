@@ -4,6 +4,8 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 互いに素: gcd(a, b) = 1
+
 ll gcd(ll a, ll b) {
   if (b == 0)
     return a;
