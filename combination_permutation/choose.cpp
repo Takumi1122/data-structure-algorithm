@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 156 D - Bouquet
+      https://atcoder.jp/contests/abc156/tasks/abc156_d
+*/
+
 const int mod = 1000000007;
 struct mint {
   ll x;  // typedef long long ll;
@@ -50,6 +56,8 @@ struct mint {
   }
 };
 
+// 2^n % mod
+// O(log(n))
 mint f(int n) {
   if (n == 0) return 1;
   mint x = f(n / 2);
@@ -58,6 +66,8 @@ mint f(int n) {
   return x;
 }
 
+// nCa % mod
+// O(a)
 mint choose(int n, int a) {
   mint x = 1, y = 1;
   rep(i, a) {

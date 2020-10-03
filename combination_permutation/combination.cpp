@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 156 E - Roaming
+      https://atcoder.jp/contests/abc156/tasks/abc156_e
+*/
+
 const int mod = 1000000007;
 struct mint {
   ll x;  // typedef long long ll;
@@ -50,6 +56,7 @@ struct mint {
   }
 };
 
+// 構築: O(n)
 struct combination {
   vector<mint> fact, ifact;
   combination(int n) : fact(n + 1), ifact(n + 1) {

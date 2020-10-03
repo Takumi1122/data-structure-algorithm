@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 階乗を求める
+// 階乗を求める O(k)
 int factorial(int k) {
   int sum = 1;
   for (int i = 1; i <= k; ++i) {
