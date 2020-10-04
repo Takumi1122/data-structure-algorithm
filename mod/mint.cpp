@@ -42,6 +42,7 @@ struct mint {
   }
 
   // for prime mod
+  // フェルマーの小定理から a * a^(p-2) ≡ 1 (mod p) pは素数
   mint inv() const { return pow(mod - 2); }
   mint& operator/=(const mint a) { return (*this) *= a.inv(); }
   mint operator/(const mint a) const {
