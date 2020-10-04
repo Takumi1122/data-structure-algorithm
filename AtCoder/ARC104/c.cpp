@@ -9,6 +9,5 @@ int main() {
   cin >> n;
   vector<P> p(n);
   rep(i, n) cin >> p[i].first >> p[i].second;
-
   return 0;
 }
