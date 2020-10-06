@@ -4,6 +4,14 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 累積和によるDP高速化
+
+/*
+    参考リンク
+    ABC179 D - Leaping Tak
+      https://atcoder.jp/contests/abc179/tasks/abc179_d
+*/
+
 const int mod = 998244353;
 struct mint {
   ll x;  // typedef long long ll;
