@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    AOJ 2895 回文部分列 (AUPC 2018 day3 G)
+      https://onlinejudge.u-aizu.ac.jp/problems/2895
+*/
+
 const int MOD = 1000000007;
 
 // res[i][c] := i 文字目以降で最初に文字 c が登場する index (存在しないときは n)

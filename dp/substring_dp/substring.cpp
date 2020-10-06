@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    Sの部分文字列(空文字含む)として考えられるものの個数 O(n)
+    ※ 連続しない部分文字列も含む
+    ※ 連続する部分文字列のみの場合は、Suffix Array + LCP
+*/
+
 const int MOD = 1000000007;
 
 // res[i][c] := i 文字目以降で最初に文字 c が登場する index (存在しないときは n)
@@ -34,6 +40,10 @@ int main() {
   vector<vector<int> > next = calcNext(s);
 
   // DP
+  /*
+      文字列Sにおいて、i−1番目の文字(0-inedexed)は必ず使うものとして
+      Sのうち0番目から i−1番目までの部分から得られる部分文字列の個数
+  */
   vector<ll> dp(n + 1, 0);
   dp[0] = 1;  // 初期化、空文字列 "" に対応
   for (int i = 0; i < n; ++i) {
