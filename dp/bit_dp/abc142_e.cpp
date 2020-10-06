@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 142 E - Get Everything
+      https://atcoder.jp/contests/abc142/tasks/abc142_e
+*/
+
 const int INF = 1001001001;
 
 int main() {
@@ -32,6 +38,7 @@ int main() {
       dp[t] = min(dp[t], cost);
     }
   }
+
   int ans = dp.back();
   if (ans == INF) ans = -1;
   cout << ans << endl;

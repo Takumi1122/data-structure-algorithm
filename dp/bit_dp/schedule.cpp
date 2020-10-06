@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    D – 部活のスケジュール表 (Schedule)
+      https://atcoder.jp/contests/joi2014yo/tasks/joi2014yo_d
+*/
+
 const int MOD = 10007;
 template <class T>
 T add_mod(T &a, const T &b) {
@@ -12,6 +18,8 @@ T add_mod(T &a, const T &b) {
   return a;
 }
 
+// dp[参加者の集合S][i]
+// i日目に参加者の集合がSだった時の、0~i日目までのスケジュールの決め方の総和
 int dp[1 << 3][1100];
 int resp[1100];  // resp[i]: i日目に誰が来たか？（J:1<<0, O:1<<1, I:1<<2）
 

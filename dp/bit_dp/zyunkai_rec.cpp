@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n^2 * 2^n) 巡回セールスマン問題　bitDP
+// O(n^2 * 2^n) 巡回セールスマン問題　bitDP
 
 const int INF = 100000000;  // 十分大きな値
 
