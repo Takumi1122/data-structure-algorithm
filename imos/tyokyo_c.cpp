@@ -4,11 +4,18 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    東京海上日動 プログラミングコンテスト2020 C - Lamps
+      https://atcoder.jp/contests/tokiomarine2020/tasks/tokiomarine2020_c
+*/
+
 int main() {
   int n, k;
   cin >> n >> k;
   vector<int> a(n);
   rep(i, n) cin >> a[i];
+
   rep(ki, k) {
     vector<int> b(n + 1);
     rep(i, n) {
