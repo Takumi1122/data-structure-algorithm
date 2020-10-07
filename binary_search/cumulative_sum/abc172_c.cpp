@@ -4,7 +4,13 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n * log(m)) 累積和 + 二分探索
+// O(n * log(m)) 累積和 + 二分探索
+
+/*
+    参考リンク
+    ABC 172 C - Tsundoku
+      https://atcoder.jp/contests/abc172/tasks/abc172_c
+*/
 
 int main() {
   ll n, m, k;
@@ -12,8 +18,11 @@ int main() {
   vector<ll> a(n), b(m);
   rep(i, n) cin >> a[i];
   rep(i, m) cin >> b[i];
+
+  // 累積和
   vector<ll> s(m + 1, 0);
   rep(i, m) s[i + 1] = s[i] + b[i];
+
   int ans = 0;
   ll t = 0;
   for (int i = 0; i <= n; i++) {
@@ -33,6 +42,7 @@ int main() {
     }
     ans = max(ans, i + l);
   }
+
   cout << ans << endl;
   return 0;
 }

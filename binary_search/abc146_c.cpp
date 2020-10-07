@@ -4,6 +4,20 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    正の整数Nに対して単調増加な式f(N)があるとき、
+
+    ・f(N) ≤ X を満たす最大の正の整数N
+
+    は、二分探索によって求めることができる
+*/
+
+/*
+    参考リンク
+    ABC 146 C - Buy an Integer
+      https://atcoder.jp/contests/abc146/tasks/abc146_c
+*/
+
 int main() {
   ll a, b, x;
   cin >> a >> b >> x;
@@ -26,6 +40,7 @@ int main() {
       r = mid;
     }
   }
+
   cout << l << endl;
   return 0;
 }

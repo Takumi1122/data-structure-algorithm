@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 143 D - Triangles
+      https://atcoder.jp/contests/abc143/tasks/abc143_d
+*/
+
 int main() {
   int n;
   cin >> n;

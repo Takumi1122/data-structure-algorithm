@@ -3,6 +3,15 @@
 using namespace std;
 typedef long long ll;
 
+// 解を仮定し可能かを二分探索で判定
+// 最小値を求める
+
+/*
+    参考リンク
+    ABC 144 E - Gluttony
+      https://atcoder.jp/contests/abc144/tasks/abc144_e
+*/
+
 int main() {
   int n;
   ll k;
@@ -15,14 +24,18 @@ int main() {
   sort(a.begin(), a.end());
   sort(f.rbegin(), f.rend());
 
+  // 解を決め打ち
   ll l = -1, r = 1e12;
   while (l + 1 < r) {
     ll c = (l + r) / 2;
+
+    //　解を決め打ちしたときの条件
     bool ok = [&] {
       ll s = 0;
       rep(i, n) { s += max(0ll, a[i] - c / f[i]); }
       return s <= k;
     }();
+
     if (ok)
       r = c;
     else
