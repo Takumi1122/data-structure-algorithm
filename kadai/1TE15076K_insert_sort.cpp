@@ -3,16 +3,16 @@
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
 
-// æŒ¿å…¥ã‚½ãƒ¼ãƒˆ o(n^2) å®‰å®šã‚½ãƒ¼ãƒˆâ—‹ã€€å†…éƒ¨ã‚½ãƒ¼ãƒˆâ—‹
+// ‘}“üƒ\[ƒg o(n^2) ˆÀ’èƒ\[ƒg›@“à•”ƒ\[ƒg›
 
 int main() {
-  // å…¥åŠ›
+  // “ü—Í
   int n;
   cin >> n;
   vector<int> a(n);
   rep(i, n) cin >> a[i];
 
-  // æŒ¿å…¥ã‚½ãƒ¼ãƒˆ
+  // ‘}“üƒ\[ƒg
   for (int i = 1; i < n; i++) {
     int v = a[i];
     int j = i;
@@ -25,7 +25,7 @@ int main() {
     a[j] = v;
   }
 
-  // å‡ºåŠ›
+  // o—Í
   rep(i, n) cout << a[i] << ", ";
   cout << endl;
 

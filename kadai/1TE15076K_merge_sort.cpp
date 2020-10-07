@@ -3,32 +3,32 @@
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
 
-// ãƒãƒ¼ã‚¸ã‚½ãƒ¼ãƒˆ o(n * log(n)) å®‰å®šã‚½ãƒ¼ãƒˆâ—‹ã€€å†…éƒ¨ã‚½ãƒ¼ãƒˆÃ—
+// ƒ}[ƒWƒ\[ƒg o(n * log(n)) ˆÀ’èƒ\[ƒg›@“à•”ƒ\[ƒg~
 
 void mergeSort(vector<int> &a, int left, int right) {
   if (right - left == 1) return;
   int mid = left + (right - left) / 2;
 
-  // å·¦åŠåˆ† [left, mid) ã‚’ã‚½ãƒ¼ãƒˆ
+  // ¶”¼•ª [left, mid) ‚ğƒ\[ƒg
   mergeSort(a, left, mid);
 
-  // å³åŠåˆ† [mid, right) ã‚’ã‚½ãƒ¼ãƒˆ
+  // ‰E”¼•ª [mid, right) ‚ğƒ\[ƒg
   mergeSort(a, mid, right);
 
-  // ä¸€æ—¦ã€Œå·¦ã€ã¨ã€Œå³ã€ã®ã‚½ãƒ¼ãƒˆçµæœã‚’ã‚³ãƒ”ãƒ¼ã—ã¦ãŠã (å³å´ã¯å·¦å³åè»¢)
+  // ˆê’Uu¶v‚Æu‰Ev‚Ìƒ\[ƒgŒ‹‰Ê‚ğƒRƒs[‚µ‚Ä‚¨‚­ (‰E‘¤‚Í¶‰E”½“])
   vector<int> buf;
   for (int i = left; i < mid; i++) buf.push_back(a[i]);
   for (int i = right - 1; i >= mid; i--) buf.push_back(a[i]);
 
-  // ãƒãƒ¼ã‚¸ã™ã‚‹
-  int iterator_left = 0;                     // å·¦å´ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿
-  int iterator_right = (int)buf.size() - 1;  // å³å´ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿
+  // ƒ}[ƒW‚·‚é
+  int iterator_left = 0;                     // ¶‘¤‚ÌƒCƒeƒŒ[ƒ^
+  int iterator_right = (int)buf.size() - 1;  // ‰E‘¤‚ÌƒCƒeƒŒ[ƒ^
   for (int i = left; i < right; i++) {
-    // å·¦å´æ¡ç”¨
+    // ¶‘¤Ì—p
     if (buf[iterator_left] <= buf[iterator_right]) {
       a[i] = buf[iterator_left++];
     }
-    // å³å´æ¡ç”¨
+    // ‰E‘¤Ì—p
     else {
       a[i] = buf[iterator_right--];
     }
@@ -36,16 +36,16 @@ void mergeSort(vector<int> &a, int left, int right) {
 }
 
 int main() {
-  // å…¥åŠ›
+  // “ü—Í
   int n;
   cin >> n;
   vector<int> a(n);
   rep(i, n) cin >> a[i];
 
-  // ãƒãƒ¼ã‚¸ã‚½ãƒ¼ãƒˆ
+  // ƒ}[ƒWƒ\[ƒg
   mergeSort(a, 0, n);
 
-  // å‡ºåŠ›
+  // o—Í
   rep(i, n) cout << a[i] << ", ";
   cout << endl;
 
