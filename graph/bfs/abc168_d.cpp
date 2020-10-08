@@ -5,6 +5,14 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
+// BFS はそもそも始点sから各頂点vへの最短路を求めるアルゴリズム
+
+/*
+    参考リンク
+    ABC 168 D - .. (Double Dots)
+      https://atcoder.jp/contests/abc168/tasks/abc168_d
+*/
+
 int main() {
   int n, m;
   cin >> n >> m;

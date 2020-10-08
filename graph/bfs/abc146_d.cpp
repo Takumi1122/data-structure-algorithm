@@ -5,6 +5,20 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<P>>;
 
+/*  
+    // 辺彩色
+    グラフの辺を彩色するもので、1つの頂点に接合するそれぞれの辺が常に別々の色になるように最適彩色
+
+    ・グラフが木ならば、「最大次数」で辺を彩色できる
+    ・一般のグラフの場合は最大次数色では塗りきれないケースが存在 (最大次数色 + 1 で塗ることは可能)
+*/
+
+/*
+    参考リンク
+    ABC 146 D - Coloring Edges on Tree
+      https://atcoder.jp/contests/abc146/tasks/abc146_d
+*/
+
 int main() {
   int n;
   cin >> n;

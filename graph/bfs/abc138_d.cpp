@@ -5,6 +5,15 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
+// 木上のクエリを処理する問題では、「まずは配列について考える」
+// 配列は「枝分かれのない木」なので、木の特殊ケースとみなせる
+
+/*
+    参考リンク
+    ABC 138 D - Ki
+      https://atcoder.jp/contests/abc138/tasks/abc138_d
+*/
+
 int main() {
   int n, q;
   cin >> n >> q;

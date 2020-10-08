@@ -6,6 +6,12 @@ using P = pair<int, int>;
 
 // 0-1BFS o(H*W) コストが0か1
 
+/*
+    参考リンク
+    ABC 176 D - Wizard in Maze
+      https://atcoder.jp/contests/abc176/tasks/abc176_d
+*/
+
 const int di[] = {-1, 0, 1, 0};
 const int dj[] = {0, -1, 0, 1};
 
