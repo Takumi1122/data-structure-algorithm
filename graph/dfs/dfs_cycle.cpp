@@ -5,6 +5,8 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
+// サイクル検出
+
 // 探索
 vector<bool> seen, finished;
 

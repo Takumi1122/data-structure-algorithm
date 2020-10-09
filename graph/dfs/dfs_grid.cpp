@@ -5,6 +5,8 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
+// sからtへ辿り着けるか(グリッドグラフの場合)
+
 // 四方向への移動ベクトル
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};

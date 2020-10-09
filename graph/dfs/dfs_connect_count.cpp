@@ -5,6 +5,8 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
+// 連結成分の個数
+
 // 深さ優先探索
 vector<bool> seen;
 void dfs(const Graph &G, int v) {

@@ -6,6 +6,7 @@ using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
 // 二部グラフ判定
+
 vector<int> color;
 bool dfs(const Graph &G, int v, int cur = 0) {
   color[v] = cur;

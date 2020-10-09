@@ -17,11 +17,13 @@ void rec(int v, const Graph &G, vector<bool> &seen, vector<int> &order) {
 
 int main() {
   int n, m;
-  cin >> n >> m;  // 頂点数と枝数
-  Graph G(n);     // 頂点数 N のグラフ
+  cin >> n >> m;
+  Graph G(n);
+
   rep(i, m) {
+    // ノード a からノード b へと有向辺を張る
     int a, b;
-    cin >> a >> b;  // ノード a からノード b へと有向辺を張る
+    cin >> a >> b;
     a--;
     b--;
     G[a].push_back(b);
@@ -34,7 +36,9 @@ int main() {
     if (seen[v]) continue;  // 既に訪問済みなら探索しない
     rec(v, G, seen, order);
   }
-  reverse(order.begin(), order.end());  // 逆順に
+
+  // 逆順に
+  reverse(order.begin(), order.end());
 
   // 出力
   for (auto v : order) cout << v << " -> ";

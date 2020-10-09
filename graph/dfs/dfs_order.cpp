@@ -5,6 +5,8 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
+// 行きがけ順と帰りがけ順
+
 vector<bool> seen;
 vector<int> first_order;  // 行きがけ順
 vector<int> last_order;   // 帰りがけ順

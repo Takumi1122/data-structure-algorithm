@@ -5,9 +5,19 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
-// 木上の探索
+// 各頂点の深さ: 行きがけ順に求めた
+// 各頂点を根とした部分木のサイズ: 帰りがけ順に求めた
+
+/*
+  「子ノードについての情報を用いて、親ノードについての情報を更新する」という
+  処理はしばしば木DPとよばれます
+*/
+
+// 各頂点の根からの距離(深さ)
 vector<int> depth;
+// 各頂点を根とした部分木のサイズ(部分木に含まれる頂点数)
 vector<int> subtree_size;
+
 void dfs(const Graph &G, int v, int p, int d) {
   depth[v] = d;
   for (auto nv : G[v]) {
