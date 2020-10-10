@@ -4,6 +4,17 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    先頭から文字を追加していくが
+    「追加するのに使えるのは'a'～今まで使われた文字の次の文字」
+*/
+
+/*
+    参考リンク
+    パナソニックプログラミングコンテスト2020 D - String Equivalence
+      https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_d
+*/
+
 int n;
 void dfs(string s, char mx) {
   if (s.size() == n) {

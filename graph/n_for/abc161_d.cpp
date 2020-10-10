@@ -1,7 +1,18 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-void rec(int d, long long val, vector<long long> &all) {
+// 計算量 : O(3^10)
+
+/*
+    参考リンク
+    ABC 161 D - Lunlun Number
+      https://atcoder.jp/contests/abc161/tasks/abc161_d
+*/
+
+void rec(int d, ll val, vector<ll> &all) {
   // 格納
   all.push_back(val);
 
@@ -16,14 +27,14 @@ void rec(int d, long long val, vector<long long> &all) {
 }
 
 int main() {
-  int K;
-  cin >> K;
-  vector<long long> all;
+  int k;
+  cin >> k;
+  vector<ll> all;
   for (int v = 1; v < 10; ++v) rec(1, v, all);
 
   // 小さい順に並び替える
   sort(all.begin(), all.end());
 
   // K 番目
-  cout << all[K - 1] << endl;
+  cout << all[k - 1] << endl;
 }
