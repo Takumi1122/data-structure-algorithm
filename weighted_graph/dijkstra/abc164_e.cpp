@@ -48,8 +48,7 @@ void solve() {
   // dp[v][s]:頂点vにいて、所持金sという状態になるのに要する最小の所要時間
   vector<vector<ll>> dp(n, vector<ll>(MAX + 1, INF));
 
-  priority_queue<pair<ll, pll>, vector<pair<ll, pll>>,
-                 greater<pair<ll, pll>>>
+  priority_queue<pair<ll, pll>, vector<pair<ll, pll>>, greater<pair<ll, pll>>>
       que;
   dp[0][s] = 0;
   // que.push(時間, pll(頂点, 所持金))

@@ -44,7 +44,7 @@ void dijkstra() {
   }
 
   rep(i, n) {
-    if(d[i] == INF) {
+    if (d[i] == INF) {
       cout << "INF" << endl;
     } else {
       cout << d[i] << endl;
