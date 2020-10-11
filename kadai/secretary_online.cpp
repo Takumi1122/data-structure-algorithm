@@ -1,23 +1,52 @@
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+#include <utility>
+#include <vector>
+using namespace std;
 
 int main() {
-	//ç§˜æ›¸ã®é…åˆ—(æ•°å€¤ã¯ç§˜æ›¸ã®èƒ½åŠ›, å¤§ãã„ã»ã©èƒ½åŠ›ãŒé«˜ã„=æ¡ç”¨ã—ãŸã„)
-	int secretaries[]
-		= { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+  // ”é‘‚Ì”z—ñ(”’l‚Í”é‘‚Ì”\—Í, ‘å‚«‚¢‚Ù‚Ç”\—Í‚ª‚‚¢=Ì—p‚µ‚½‚¢)
+  int secretaries[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+  // ”z—ñ‚ÌƒTƒCƒY
+  int size = sizeof(secretaries) / sizeof(secretaries[0]);
 
-	//æ¡ç”¨ã—ãŸç§˜æ›¸ã®èƒ½åŠ›ã®åˆè¨ˆå€¤
-	int secretarySum = 0;
+  // Ì—p‚µ‚½”é‘‚Ì”\—Í‚Ì‡Œv’l
+  int secretarySum = 0;
 
-	for (int i = 0; i < 1000; i++) {
+  srand((unsigned int)time(NULL));
+  for (int i = 0; i < 1000; i++) {
+    // ”z—ñ‚ÌŠe—v‘f‚Éƒ‰ƒ“ƒ_ƒ€‚É—Dæ“x‚ğ•t‚¯, —Dæ“x‡‚Éƒ\[ƒg
+    vector<pair<int, int>> secretaries_pair(size);
+    for (int j = 0; j < size; j++) {
+      int val = rand() % (size * size * size) + 1;
+      secretaries_pair[j].first = val;
+      secretaries_pair[j].second = secretaries[j];
+    }
+    sort(secretaries_pair.begin(), secretaries_pair.end());
 
-		//ç¾åœ¨æ¡ç”¨ä¸­ã®ç§˜æ›¸ã®èƒ½åŠ›
-		int currentSecretary = 0;
+    // Œ»İÌ—p’†‚Ì”é‘‚Ì”\—Í
+    int currentSecretary = 0;
 
-		//ã‚ªãƒ³ãƒ©ã‚¤ãƒ³é›‡ç”¨ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ 
+    // ƒIƒ“ƒ‰ƒCƒ“ŒÙ—pƒAƒ‹ƒSƒŠƒYƒ€
+    int mx_3 = 0;
+    for (int j = 0; j < size; j++) {
+      if (j == 0 || j == 1 || j == 2) {
+        mx_3 = max(mx_3, secretaries_pair[j].second);
+        continue;
+      }
 
-		secretarySum += currentSecretary;
-	}
+      if (mx_3 >= 100) {
+        currentSecretary = secretaries_pair[size - 1].second;
+        break;
+      }
 
-	//æ¡ç”¨ã—ãŸç§˜æ›¸ã®èƒ½åŠ›ã®å¹³å‡ã‚’è¡¨ç¤º
-	std::cout << (float)secretarySum / 1000.0f << std::endl;
+      currentSecretary = max(currentSecretary, secretaries_pair[j].second);
+    }
+    secretarySum += currentSecretary;
+  }
+
+  // Ì—p‚µ‚½”é‘‚Ì”\—Í‚Ì•½‹Ï‚ğ•\¦
+  cout << (float)secretarySum / 1000.0f << endl;
 }
