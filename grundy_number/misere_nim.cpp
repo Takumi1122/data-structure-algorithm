@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    HackerRank Misère Nim
+      https://www.hackerrank.com/contests/5-days-of-game-theory/challenges/misere-nim
+*/
+
 int main() {
   int T;
   cin >> T;

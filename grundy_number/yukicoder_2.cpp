@@ -4,6 +4,23 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 不偏ゲーム
+
+/*
+    // Grundy数の定義
+    ・終了状態PfでのGrundy数 = 0
+    ・ある状態PでのGrundy数 = mex(「Pから到達可能な状態P’のGrundy数」の集合 )
+
+    ・Grundy数が正: 上手く手を選ぶと次の状態でのGrundy数を0にできる→先手必勝
+    ・Grundy数が0: どのように手を選んでも、次のGrundy数はnon-zero→後手必勝
+*/
+
+/*
+    参考リンク
+    yukicoder No.2 素因数ゲーム
+      https://yukicoder.me/problems/18
+*/
+
 vector<pair<ll, ll> > prime_factorize(ll n) {
   vector<pair<ll, ll> > res;
   for (ll a = 2; a * a <= n; ++a) {
