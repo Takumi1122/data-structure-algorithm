@@ -4,9 +4,16 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// ベルマンフォード法 o(|V||E|)
+// ベルマンフォード法 O(|V||E|)
+// 単一始点最短経路問題
 // 負の辺が含まれているような場合でも適用可能
 // 負の閉路がグラフに含まれている際はそれを検出することができる
+
+/*
+    参考リンク
+    AIZU ONLINE JUDGE
+      https://onlinejudge.u-aizu.ac.jp/problems/GRL_1_B
+*/
 
 struct Edge {
   ll from;
@@ -43,6 +50,7 @@ bool bellman_ford(const Edges &Es, int V, int s, vector<ll> &dis) {
 }
 
 int main() {
+  // v: 頂点数, e: 辺数, r: 始点
   int v, e, r;
   cin >> v >> e >> r;
   Edges edges;

@@ -4,10 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(|V|^3)
+// ワーシャル–フロイド法
+// O(|V|^3)
+// 全点対最短経路問題
 
-static const int MAX = 300;
-static const ll INFTY = (1LL << 32);
+const int MAX = 300;
+const ll INF = (1LL << 32);
 
 int n;
 ll d[MAX][MAX];
@@ -15,9 +17,9 @@ ll d[MAX][MAX];
 void floyd() {
   rep(k, n) {
     rep(i, n) {
-      if (d[i][k] == INFTY) continue;
+      if (d[i][k] == INF) continue;
       rep(j, n) {
-        if (d[k][j] == INFTY) continue;
+        if (d[k][j] == INF) continue;
         d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
       }
     }
@@ -25,12 +27,13 @@ void floyd() {
 }
 
 int main() {
-  int e, u, v, c;
+  int e;
+  // n: 頂点すう, e: 辺数
   cin >> n >> e;
-
-  rep(i, n) rep(j, n) d[i][j] = ((i == j) ? 0 : INFTY);
+  rep(i, n) rep(j, n) d[i][j] = ((i == j) ? 0 : INF);
 
   rep(i, e) {
+    int u, v, c;
     cin >> u >> v >> c;
     d[u][v] = c;
   }
@@ -46,7 +49,7 @@ int main() {
     rep(i, n) {
       rep(j, n) {
         if (j) cout << " ";
-        if (d[i][j] == INFTY)
+        if (d[i][j] == INF)
           cout << "INF";
         else
           cout << d[i][j];
