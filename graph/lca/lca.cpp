@@ -42,9 +42,11 @@ struct LCA {
 
   int get(int u, int v) {
     if (depth[u] > depth[v]) swap(u, v);
+    // uとvの深さが同じになるまで親をたどる
     for (int i = 0; i < (int)parent.size(); ++i)
       if ((depth[v] - depth[u]) & (1 << i)) v = parent[i][v];
     if (u == v) return u;
+    // 二分探索でLCAを求める
     for (int i = (int)parent.size() - 1; i >= 0; --i) {
       if (parent[i][u] != parent[i][v]) {
         u = parent[i][u];
