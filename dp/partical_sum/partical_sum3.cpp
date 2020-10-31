@@ -4,10 +4,9 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n * A) 最小個数部分和問題
+// O(n * A) 最小個数部分和問題
 
-const int INF =
-    1 << 29;  // 十分大きい値にする, INT_MAX にしないのはオーバーフロー対策
+const int INF = 1 << 29;
 
 // 入力
 int n, A;

@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n * A) 部分和問題
+// O(n * A) 部分和問題
 
 // 入力
 int n, A;

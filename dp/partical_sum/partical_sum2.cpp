@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n * A) 部分和数え上げ問題
+// O(n * A) 部分和数え上げ問題
 
 const int MOD = 1000000009;
 
