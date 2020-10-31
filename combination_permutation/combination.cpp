@@ -58,6 +58,7 @@ struct mint {
 
 // 構築: O(n)
 struct combination {
+  // fact[i]: iの階乗
   vector<mint> fact, ifact;
   combination(int n) : fact(n + 1), ifact(n + 1) {
     assert(n < mod);
