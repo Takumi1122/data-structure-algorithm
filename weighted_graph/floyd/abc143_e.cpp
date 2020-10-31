@@ -4,7 +4,13 @@
 using namespace std;
 typedef long long ll;
 
-// ワーシャルフロイド法 o(|V|^3)
+// ワーシャルフロイド法 O(|V|^3)
+
+/*
+    参考リンク
+    ABC 143 E - Travel by Car
+      https://atcoder.jp/contests/abc143/tasks/abc143_e
+*/
 
 const int INF = 1001001001;
 
@@ -24,6 +30,7 @@ int main() {
   rep(k, n) rep(i, n) rep(j, n) chmin(dist[i][j], dist[i][k] + dist[k][j]);
   vector<vector<int>> dist2(n, vector<int>(n, INF));
   rep(i, n) rep(j, n) {
+    // 1回の補給で行ける場所に辺を張る
     if (dist[i][j] <= l) dist2[i][j] = 1;
   }
   rep(k, n) rep(i, n) rep(j, n) chmin(dist2[i][j], dist2[i][k] + dist2[k][j]);
