@@ -14,8 +14,8 @@ class STACK {
       cout << "オーバーフロー";
       exit(1);
     }
-    top = top + 1;
     S[top] = x;
+    top = top + 1;
   }
 
   int POP() {
@@ -25,7 +25,7 @@ class STACK {
       exit(1);
     }
     top = top - 1;
-    return S[top + 1];
+    return S[top];
   }
 
   bool STACK_EMPTY() {
@@ -48,21 +48,15 @@ class QUEUE {
 
   void ENQUEUE(int x) {
     // ここを埋める
-    Q[tail] = x;
-    if (tail == MAX)
-      tail = 1;
-    else
-      tail = tail + 1;
+    Q[tail++] = x;
+    if (tail == MAX) tail = 0;
   }
 
   int DEQUEUE() {
     // ここを埋める
-    int x;
-    x = Q[head];
-    if (head == MAX)
-      head = 1;
-    else
-      head = head + 1;
+    int x = Q[head];
+    ++head;
+    if (head == MAX) head = 0;
     return x;
   }
 };
