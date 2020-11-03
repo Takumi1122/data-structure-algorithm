@@ -4,11 +4,16 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 木の直径 o(n)
+// 木の直径 O(n)
 
-#define MAX 100000
-#define INFTY \
-  (1 << 30)  // 1を30bit左にシフトする // 未探索の頂点を探すために使用
+/*
+    参考リンク
+    AIZU ONLINE JUDGE
+      https://onlinejudge.u-aizu.ac.jp/problems/GRL_5_A
+*/
+
+const int MAX = 100000;
+const int INF = 1 << 30;
 
 class Edge {
  public:
@@ -25,19 +30,18 @@ int cnt;
 
 // 幅優先探索
 void bfs(int s) {
-  rep(i, n) d[i] = INFTY;
+  rep(i, n) d[i] = INF;
   queue<int> q;
-  q.push(s);  // Q = [0]
+  q.push(s);
   d[s] = 0;
   int u;
   while (!q.empty()) {
     u = q.front();
-    q.pop();  // u は各節点 ex) 0
-    rep(i, G[u].size()) {
-      Edge e = G[u][i];
-      if (d[e.t] == INFTY) {  // 訪問した頂点から隣接してかつ未訪問の頂点を探索
-        d[e.t] = d[u] + e.w;  // 距離を計算し
-        q.push(e.t);          // キューに追加
+    q.pop();
+    for (auto e : G[u]) {
+      if (d[e.t] == INF) {
+        d[e.t] = d[u] + e.w;
+        q.push(e.t);
       }
     }
   }
@@ -49,7 +53,7 @@ void solve() {
   int maxv = 0;
   int tgt = 0;
   rep(i, n) {
-    if (d[i] == INFTY) continue;
+    if (d[i] == INF) continue;
     if (maxv < d[i]) {
       maxv = d[i];
       tgt = i;
@@ -60,7 +64,7 @@ void solve() {
   bfs(tgt);
   maxv = 0;
   rep(i, n) {
-    if (d[i] == INFTY) continue;
+    if (d[i] == INF) continue;
     maxv = max(maxv, d[i]);
   }
 
@@ -68,14 +72,14 @@ void solve() {
 }
 
 int main() {
-  int s, t, w;
   cin >> n;
 
   rep(i, n - 1) {
+    int s, t, w;
     cin >> s >> t >> w;
-
-    G[s].push_back(Edge(t, w));  // ベクタの最後に要素を追加
+    G[s].push_back(Edge(t, w));
     G[t].push_back(Edge(s, w));
   }
+
   solve();
 }
