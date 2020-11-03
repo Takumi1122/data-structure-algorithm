@@ -1,48 +1,27 @@
-#include <cmath>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); i++)
 using namespace std;
-
-int N;
-int M;
-int S[5];
-int C[5];
-int v = -1;
-int count1 = 0;
-int count2 = 0;
-int count3 = 0;
+using ll = long long;
+using P = pair<int, int>;
 
 int main() {
-  cin >> N >> M;
-  for (int i = 0; i < M; i++) {
-    cin >> S[i] >> C[i];
-  }
+  int n, m;
+  cin >> n >> m;
+  vector<int> s(m);
+  vector<int> c(m);
+  rep(i, m) cin >> s[i] >> c[i];
 
-  for (int i = 0; i < M; i++) {
-    if (S[i] == 1) {
-      cout << v << endl;
+  for (int i = 0; i <= 999; i++) {
+    string s_sub = to_string(i);
+    if (s_sub.size() != n) continue;
+    int ok = true;
+    rep(i, m) {
+      if ((s_sub[s[i] - 1] - '0') != c[i]) ok = false;
+    }
+    if (ok) {
+      cout << i << endl;
       return 0;
     }
   }
-
-  for (int i = 0; i < M; i++) {
-    if (S[i] == 1) {
-      if (count1 == 0) {
-        v += C[i] * pow(10, (N - 1));
-      }
-      count1++;
-    } else if (S[i] == 2) {
-      if (count2 == 0) {
-        v += C[i] * pow(10, (N - 2));
-      }
-      count2++;
-    } else if (S[i] == 3) {
-      if (count3 == 0) {
-        v += C[i] * pow(10, (N - 3));
-      }
-      count3++;
-    }
-  }
-
-  cout << v << endl;
+  cout << -1 << endl;
 }
