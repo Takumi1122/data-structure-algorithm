@@ -20,6 +20,8 @@ int main() {
   rep(i, n) cin >> a[i];
 
   ll ans = 0;
+  // 累積和の累積和 s
+  // 累積和 b
   ll s = 0, b = 0;
   ll max_b = 0;
   rep(i, n) {
