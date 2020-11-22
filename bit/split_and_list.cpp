@@ -4,48 +4,56 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 半分全列挙 o(2^(n/2) * N)
+// 半分全列挙 O(n * 2^(n/2))
+
+/*
+    参考リンク
+    ABC 184 F - Programming Contest
+      https://atcoder.jp/contests/abc184/tasks/abc184_f
+*/
+
+template <class T>
+inline bool chmax(T& a, T b) {
+  if (a < b) {
+    a = b;
+    return 1;
+  }
+  return 0;
+}
+template <class T>
+inline bool chmin(T& a, T b) {
+  if (a > b) {
+    a = b;
+    return 1;
+  }
+  return 0;
+}
 
 int main() {
-  // 入力
-  int n, s;
-  cin >> n >> s;
-  vector<int> num(n);
-  rep(i, n) cin >> num[i];
+  ll n, t;
+  cin >> n >> t;
+  vector<ll> a(n);
+  rep(i, n) cin >> a[i];
 
-  // グループ１をビット全探索で全列挙 (前半の半分)
-  vector<int> A;
-  for (int bit = 0; bit < (1 << n / 2); bit++) {
-    int sum = 0;
-    rep(i, n / 2) {
-      int mask = 1 << i;
-      if (bit & mask) {
-        sum += num[i];
-      }
-    }
-    A.push_back(sum);
+  // 後半半分を列挙
+  vector<ll> q;
+  for (int bit = 0; bit < (1 << (n - n / 2)); ++bit) {
+    ll sum = 0;
+    rep(i, n - n / 2) if (bit & (1LL << i)) sum += a[i + n / 2];
+    q.push_back(sum);
   }
-  // グループ2をビット全探索で全列挙 (後半の半分)
-  vector<int> B;
-  for (int bit = 0; bit < (1 << n / 2); bit++) {
-    int sum = 0;
-    rep(i, n / 2) {
-      int mask = 1 << i;
-      if (bit & mask) {
-        sum += num[n / 2 + i];
-      }
-    }
-    B.push_back(sum);
-  }
+  sort(q.begin(), q.end());
+  q.push_back(1LL << 60);
 
-  sort(B.begin(), B.end());  // B をソート
-  // A の要素を固定して二分探索
-  int ans = 0;
-  for (auto a : A) {
-    if (s - a >= 0) {
-      ans = max(ans, a + *(upper_bound(B.begin(), B.end(), s - a) - 1));
-    }
+  // 前半を固定して二分探索
+  ll ans = 0;
+  for (int bit = 0; bit < (1 << (n / 2)); ++bit) {
+    ll sum = 0;
+    rep(i, n / 2) if (bit & (1LL << i)) sum += a[i];
+    if (sum > t) continue;
+    auto it = upper_bound(q.begin(), q.end(), t - sum) - q.begin();
+    --it;
+    chmax(ans, sum + q[it]);
   }
   cout << ans << endl;
-  return 0;
 }
