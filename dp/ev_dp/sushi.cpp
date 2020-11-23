@@ -10,23 +10,6 @@ using P = pair<int, int>;
       https://atcoder.jp/contests/dp/tasks/dp_j
 */
 
-template <class T>
-inline bool chmax(T& a, T b) {
-  if (a < b) {
-    a = b;
-    return true;
-  }
-  return false;
-}
-template <class T>
-inline bool chmin(T& a, T b) {
-  if (a > b) {
-    a = b;
-    return true;
-  }
-  return false;
-}
-
 int N;
 double dp[310][310][310];
 
