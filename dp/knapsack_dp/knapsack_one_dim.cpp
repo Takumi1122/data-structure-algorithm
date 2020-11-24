@@ -30,10 +30,10 @@ void chmax(T &a, T b) {
 int main() {
   int n, W;
   cin >> n >> W;
-  vector<int> weight(n), value(n);
+  vector<ll> weight(n), value(n);
   rep(i, n) cin >> weight[i] >> value[i];
 
-  vector<long long> dp(W + 1, 0);
+  vector<ll> dp(W + 1, 0);
   for (int i = 0; i < n; ++i) {
     for (int w = W; w >= 0; --w) {
       if (w - weight[i] >= 0) {
