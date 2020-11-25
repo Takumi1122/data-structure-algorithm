@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// クイックソート o(n * log(n)) 安定ソート×　内部ソート○
+// クイックソート o(n^2) 安定ソート×　内部ソート○
 
 /* 配列 a の [left, right) をソートします */
 void quickSort(vector<int> &a, int left, int right) {
