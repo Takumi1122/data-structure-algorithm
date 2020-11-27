@@ -6,8 +6,8 @@ using P = pair<int, int>;
 
 /*
     参考リンク
-    Typical DP Contest E – 数
-      https://atcoder.jp/contests/tdpc/tasks/tdpc_number
+    Educational DP Contest S - Digit Sum
+      https://atcoder.jp/contests/dp/tasks/dp_s
 */
 
 /*
@@ -23,9 +23,9 @@ const int mod = 1e9 + 7;
 ll dp[10005][2][105];
 
 int main() {
-  int d;
   string N;
-  cin >> d >> N;
+  int d;
+  cin >> N >> d;
   int n = N.size();
   dp[0][0][0] = 1;
   rep(i, n) {
@@ -45,9 +45,10 @@ int main() {
 
       //  i桁目までNと同じで、i+1桁目もNと同じ数の時
       dp[i + 1][0][(j + ni) % d] = dp[i][0][j];
+      dp[i + 1][0][(j + ni) % d] %= mod;
     }
   }
 
-  cout << dp[n][0][0] + dp[n][1][0] - 1 << endl;
+  cout << (dp[n][0][0] + dp[n][1][0] - 1 + mod) % mod << endl;
   return 0;
 }
