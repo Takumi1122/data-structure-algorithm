@@ -4,18 +4,23 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 連続する部分列のうち、単調増加となっているものを数え上げ
+
+/*
+    参考リンク
+    ABC 038 C - 単調増加
+      https://atcoder.jp/contests/abc038/tasks/abc038_c
+*/
+
 int main() {
-  /* 入力受け取り */
   int n;
   cin >> n;
   vector<ll> a(n);
   rep(i, n) cin >> a[i];
 
-  /* しゃくとり法 */
   ll res = 0;
-  int right = 1;  // [0, 1) は確実に条件を満たす
+  int right = 1;
   rep(left, n) {
-    // right を 1 個進めたものが条件を満たすかどうか
     while (right < n && (right <= left || a[right - 1] < a[right])) {
       ++right;
     }
