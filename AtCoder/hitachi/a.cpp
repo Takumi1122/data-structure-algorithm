@@ -8,10 +8,12 @@ int main() {
   string s;
   cin >> s;
 
-  rep(i, s.size()) {
-    if (s[i] + s[i + 1] == "hi" && s[i] + s[i + 1] + s[i + 2] != "hii") {
+  string hitachi = "";
+  for (int i = 1; i <= 5; i++) {
+    hitachi += "hi";
+    if (hitachi == s) {
       cout << "Yes" << endl;
-      break;
+      return 0;
     }
   }
 

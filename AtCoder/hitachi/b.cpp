@@ -5,27 +5,30 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int a, b, m, min;
-  cin >> a >> b >> m;
-  int A[a], B[b], x[m], y[m], c[m];
-  int minA = (1 << 30);
-  int minB = (1 << 30);
-  int minS;
-  rep(i, a) {
-    cin >> A[i];
-    if (A[i] < minA) minA = A[i];
+  int A, B, m;
+  cin >> A >> B >> m;
+  vector<int> a(A);
+  vector<int> b(B);
+  int ma = 1e9;
+  int mb = 1e9;
+  rep(i, A) {
+    cin >> a[i];
+    ma = min(ma, a[i]);
   }
-  rep(i, b) {
-    cin >> B[i];
-    if (B[i] < minB) minB = B[i];
+  rep(i, B) {
+    cin >> b[i];
+    mb = min(mb, b[i]);
   }
-  minS = minA + minB;
+  int ms = ma + mb;
+
   rep(i, m) {
-    cin >> x[i] >> y[i] >> c[i];
-    if ((A[x[i]] + B[y[i]] - c[i]) < minS) minS = (A[x[i]] + B[y[i]] - c[i]);
+    int x, y, c;
+    cin >> x >> y >> c;
+    x--;
+    y--;
+    ms = min(ms, a[x] + b[y] - c);
   }
 
-  cout << minS << endl;
-
+  cout << ms << endl;
   return 0;
 }
