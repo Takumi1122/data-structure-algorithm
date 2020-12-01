@@ -29,6 +29,7 @@ int main() {
     if (a == b) break;
     a = b;
   }
+
   rep(i, n) cout << a[i] << endl;
   return 0;
 }
