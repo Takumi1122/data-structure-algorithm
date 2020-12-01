@@ -5,17 +5,20 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int A, B, C, K, cnt = 0;
-  cin >> A >> B >> C >> K;
-  while (A >= B) {
-    cnt += 1;
-    B *= 2;
+  int a, b, c, k;
+  int cnt = 0;
+  cin >> a >> b >> c >> k;
+
+  while (a >= b) {
+    cnt++;
+    b *= 2;
   }
-  while (B >= C) {
-    cnt += 1;
-    C *= 2;
+  while (b >= c) {
+    cnt++;
+    c *= 2;
   }
-  if (cnt <= K)
+
+  if (cnt <= k)
     cout << "Yes" << endl;
   else
     cout << "No" << endl;

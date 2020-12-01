@@ -9,12 +9,11 @@ int main() {
   cin >> n >> k;
   vector<ll> a(n);
   rep(i, n) cin >> a[i];
-  vector<ll> mul(n + 1, 0);
-  rep(i, n) mul[i + 1] = mul[i] + a[i];
+
   for (int i = k + 1; i <= n; i++) {
-    ll mul1 = mul[i] - mul[i - k];
-    ll mul2 = mul[i - 1] - mul[i - 1 - k];
-    if (mul1 > mul2) {
+    ll a1 = a[i - k - 1];
+    ll a2 = a[i - 1];
+    if (a2 > a1) {
       cout << "Yes" << endl;
     } else {
       cout << "No" << endl;
