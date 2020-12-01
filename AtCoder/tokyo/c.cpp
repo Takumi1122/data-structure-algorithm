@@ -9,16 +9,21 @@ int main() {
   cin >> n >> k;
   vector<int> a(n);
   rep(i, n) cin >> a[i];
-  vector<int> anow(n);
-  anow = a;
-  rep(i, k) {
-    vector<int> ans(n, 1);
-    rep(j, n) rep(t, anow[j]) {
-      if (j - t - 1 >= 0) ans[j - t - 1]++;
-      if (j + t + 1 <= n) ans[j + t + 1]++;
+
+  rep(ki, k) {
+    vector<int> b(n + 1);
+    rep(i, n) {
+      int l = max(0, i - a[i]);
+      int r = min(i + a[i] + 1, n);
+      b[l]++;
+      b[r]--;
     }
-    anow = ans;
+    rep(i, n) b[i + 1] += b[i];
+    b.pop_back();
+    if (a == b) break;
+    a = b;
   }
-  rep(i, n) cout << anow[i] << endl;
+
+  rep(i, n) cout << a[i] << endl;
   return 0;
 }
