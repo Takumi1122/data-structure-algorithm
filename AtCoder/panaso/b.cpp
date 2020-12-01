@@ -5,15 +5,16 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  ll h, w, c;
+  ll h, w;
   cin >> h >> w;
 
+  ll ans;
   if (h == 1 || w == 1) {
-    c = 1;
+    ans = 1;
   } else {
-    c = ((h + 1) / 2) * ((w + 1) / 2) + (h / 2) * (w / 2);
+    ans = (h * w + 1) / 2;
   }
 
-  cout << c << endl;
+  cout << ans << endl;
   return 0;
 }

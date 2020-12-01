@@ -4,17 +4,27 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-int main() {
-  ll a, b, c, r, l;
-  cin >> a >> b >> c;
-  l = (c - (a + b)) * (c - (a + b));
-  r = 4 * a * b;
+// ルートの不等式を変形
+// a,bが正の時: a < b <=> a^2 < b^2
 
-  if (l > r && c - (a + b) > 0) {
+/*
+    参考リンク
+    パナソニックプログラミングコンテスト2020 C - Sqrt Inequality
+      https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_c
+*/
+
+int main() {
+  ll a, b, c;
+  cin >> a >> b >> c;
+
+  ll l, r;
+  l = 4 * a * b;
+  r = (c - (a + b)) * (c - (a + b));
+
+  if (l < r && c - (a + b) > 0) {
     cout << "Yes" << endl;
   } else {
     cout << "No" << endl;
   }
-
   return 0;
 }
