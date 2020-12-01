@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 128 C - Switches
+      https://atcoder.jp/contests/abc128/tasks/abc128_c
+*/
+
 int main() {
   int n, m;
   cin >> n >> m;
