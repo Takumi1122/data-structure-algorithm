@@ -1,24 +1,26 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 struct Edge {
-  int to;      // 辺の行き先
-  int weight;  // 辺の重み
+  int to;
+  int weight;
   Edge(int t, int w) : to(t), weight(w) {}
 };
 using Graph = vector<vector<Edge>>;
 
 int main() {
-  // 頂点数と辺数
-  int N, M;
-  cin >> N >> M;
+  int n, m;
+  cin >> n >> m;
 
-  // グラフ
-  Graph G(N);
-  for (int i = 0; i < M; ++i) {
-    int from, to, weight;
-    cin >> from >> to >> weight;
-    G[from].push_back(Edge(to, weight));
+  Graph G(n);
+  rep(i, m) {
+    int u, v, w;
+    cin >> u >> v >> w;
+    u--;
+    v--;
+    G[u].push_back(Edge(v, w));
   }
 }
