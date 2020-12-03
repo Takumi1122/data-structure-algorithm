@@ -1,27 +1,30 @@
 #include <bits/stdc++.h>
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
-using ll = long long;
-using P = pair<int, int>;
+typedef long long ll;
 
 int main() {
   int n, m;
   cin >> n >> m;
-  vector<int> ans(n + 1, 0);
-  int ac = 0, wa = 0;
+  vector<int> ac(n), pena(n);
   rep(i, m) {
-    int num;
+    int p;
     string s;
-    cin >> num >> s;
-    if (s == "AC" && ans[num] == 0) {
-      ans[num]++;
-      ac++;
-    } else if (s == "WA" && ans[num] == 0) {
-      wa++;
+    cin >> p >> s;
+    --p;
+    if (ac[p]) continue;
+    if (s == "AC") {
+      ac[p] = 1;
     } else {
-      continue;
+      pena[p]++;
     }
   }
-  printf("%d %d\n", ac, wa);
+
+  int AC = 0, PENA = 0;
+  rep(i, n) {
+    AC += ac[i];
+    if (ac[i]) PENA += pena[i];
+  }
+  printf("%d %d\n", AC, PENA);
   return 0;
 }
