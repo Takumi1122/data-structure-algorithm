@@ -32,11 +32,10 @@ int main() {
   vector<ll> ab(n);
   rep(i, n) ab[i] = a[i] - b[i];
 
-  // 頂点 s をスタートとした探索
   vector<int> dist(n, -1);
   queue<int> que;
   rep(v, n) {
-    if (dist[v] != -1) continue;  // v が探索済みならスルー
+    if (dist[v] != -1) continue;
     dist[v] = 0, que.push(v);
     ll sum = ab[v];
     while (!que.empty()) {

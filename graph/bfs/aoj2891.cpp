@@ -14,17 +14,15 @@ using Graph = vector<vector<int>>;
 */
 
 int main() {
-  // 頂点数 (サイクルを一つ含むグラフなので辺数は N で確定)
   int n;
   cin >> n;
 
-  // グラフ入力受取
   Graph G(n);
-  vector<int> deg(n, 0);  // 各頂点の出次数
+  vector<int> deg(n, 0);
   rep(i, n) {
     int a, b;
     cin >> a >> b;
-    --a, --b;  // 0-indexed にする
+    --a, --b;
     G[a].push_back(b);
     G[b].push_back(a);
     ++deg[a], ++deg[b];
@@ -35,7 +33,6 @@ int main() {
   queue<int> que;
   rep(v, n) if (deg[v] == 1) que.push(v);
 
-  // 探索
   vector<bool> ispushed(n, false);
   while (!que.empty()) {
     int v = que.front();
@@ -47,7 +44,6 @@ int main() {
     }
   }
 
-  // クエリに答える
   int q;
   cin >> q;
   for (int _ = 0; _ < q; ++_) {
@@ -59,4 +55,4 @@ int main() {
     else
       cout << 1 << endl;
   }
-}  
+}

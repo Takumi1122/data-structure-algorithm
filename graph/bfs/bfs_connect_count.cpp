@@ -8,11 +8,9 @@ using Graph = vector<vector<int>>;
 // 連結成分の個数
 
 int main() {
-  // 頂点数と辺数
   int n, m;
   cin >> n >> m;
 
-  // グラフ入力受取 (ここでは無向グラフを想定)
   Graph G(n);
   rep(i, m) {
     int a, b;
@@ -23,12 +21,12 @@ int main() {
     G[b].push_back(a);
   }
 
-  // 頂点 s をスタートとした探索
   vector<int> dist(n, -1);
   queue<int> que;
   int count = 0;
+
   rep(v, n) {
-    if (dist[v] != -1) continue;  // v が探索済みならスルー
+    if (dist[v] != -1) continue;
     dist[v] = 0, que.push(v);
     while (!que.empty()) {
       int v = que.front();
@@ -42,5 +40,7 @@ int main() {
     }
     ++count;
   }
+
   cout << count << endl;
+  return 0;
 }

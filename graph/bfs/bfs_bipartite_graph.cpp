@@ -9,11 +9,9 @@ using Graph = vector<vector<int>>;
 // dist の値が等しい頂点同士が隣接することはない
 
 int main() {
-  // 頂点数と辺数
   int n, m;
   cin >> n >> m;
 
-  // グラフ入力受取 (ここでは無向グラフを想定)
   Graph G(n);
   rep(i, m) {
     int a, b;
@@ -28,7 +26,7 @@ int main() {
   vector<int> dist(n, -1);
   queue<int> que;
   rep(v, n) {
-    if (dist[v] != -1) continue;  // v が探索済みならスルー
+    if (dist[v] != -1) continue;
     dist[v] = 0, que.push(v);
     while (!que.empty()) {
       int v = que.front();
