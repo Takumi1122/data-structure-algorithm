@@ -4,66 +4,44 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-int GCD(int x, int y) {
-  if (y == 0)
-    return x;
-  else
-    return GCD(y, x % y);
-}
+// O(n * log(n))
 
-int LCM(int a, int b) {
-  int g;
-  g = GCD(a, b);
-  return a * b / g;
-}
+/*
+    参考リンク
+    ABC 150 D - Semi Common Multiple
+      https://atcoder.jp/contests/abc150/tasks/abc150_d
+*/
 
-int GCD_N(vector<int> &a) {
-  int g;
-  g = a[0];
-  for (int i = 1; i < a.size(); i++) {
-    g = GCD(g, a[i]);
+ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
+ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+
+ll solve(int n, ll m, vector<ll> &a) {
+  // 2で割れるだけ割る(割れる回数が異なったらダメ)
+  while (a[0] % 2 == 0) {
+    rep(i, n) {
+      if (a[i] % 2 != 0) return 0;
+      a[i] /= 2;
+    }
+    m /= 2;
   }
-  return g;
-}
+  rep(i, n) if (a[i] % 2 == 0) return 0;
 
-int LCM_N(vector<int> &a) {
-  int l;
-  l = a[0];
-  for (int i = 1; i < a.size(); i++) {
-    l = LCM(l, a[i]);
+  // lcm
+  ll lc = 1;
+  rep(i, n) {
+    lc = lcm(lc, a[i]);
+    if (lc > m) return 0;
   }
-  return l;
-}
-
-bool is_pow2(int x) {
-  if (x == 0) {
-    return false;
-  }
-  return (x & (x - 1)) == 0;
-}
-
-int is_pow2_n(vector<int> &a) {
-  bool l = true;
-  for (int i = 1; i < a.size(); i++) {
-    l = is_pow2(a[i]);
-    if (!l) break;
-  }
-  return l;
+  return (m / lc + 1) / 2;
 }
 
 int main() {
-  int n, m;
+  int n;
+  ll m;
   cin >> n >> m;
-  vector<int> a(n);
-  rep(i, n) cin >> a[i];
+  vector<ll> a(n);
 
-  int l = LCM_N(a) / 2;
-  int c = 0;
-  for (int i = 1; i <= m / l; i++) {
-    int l2 = l * i;
-    if (l2 % 2 == 0) continue;
-    c++;
-  }
-  cout << c << endl;
-  return 0;
+  // あらかじめaは一回2で割っておく
+  rep(i, n) cin >> a[i], a[i] /= 2;
+  cout << solve(n, m, a) << endl;
 }

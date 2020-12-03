@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
-using ll = long long;
-using P = pair<int, int>;
+typedef long long ll;
 
 int main() {
   int n;
@@ -10,37 +9,16 @@ int main() {
   vector<int> p(n), q(n);
   rep(i, n) cin >> p[i];
   rep(i, n) cin >> q[i];
-  int pv = 0, qv = 0;
-  rep(i, n) {
-    pv += p[i] * pow(10, n - 1 - i);
-    qv += q[i] * pow(10, n - 1 - i);
-  }
-  vector<int> x(n, 0), y;
-  int c = 0;
-  for (int i = 0; i < n; i++) x[i] = i + 1;
+
+  vector<int> a(n);
+  rep(i, n) a[i] = i + 1;
+
+  map<vector<int>, int> mp;
   do {
-    rep(i, n) {
-      if (i == 0) {
-        y.push_back(0);
-        y[c] += x[i];
-      } else {
-        y[c] += x[i] * pow(10, i);
-      }
-    }
-    c++;
-  } while (next_permutation(x.begin(), x.end()));
+    mp[a] = mp.size();
+  } while (next_permutation(a.begin(), a.end()));
 
-  sort(y.begin(), y.end());
-  int np, nq;
-
-  auto itr1 = find(y.begin(), y.end(), pv);
-  np = itr1 - y.begin();
-  np++;
-  auto itr2 = find(y.begin(), y.end(), qv);
-  nq = itr2 - y.begin();
-  nq++;
-
-  cout << abs(np - nq) << endl;
-
+  int ans = abs(mp[p] - mp[q]);
+  cout << ans << endl;
   return 0;
 }
