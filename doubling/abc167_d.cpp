@@ -23,16 +23,15 @@ int main() {
   vector<int> a(n);
   rep(i, n) {
     cin >> a[i];
-    a[i]--;  // 0-indexed に変更
+    a[i]--;
   }
 
-  int logK = 1;
-  while ((1LL << logK) < K) logK++;
-  // doubling[k][i] : i番目から 2^k 進んだ町
-  vector<vector<int> > doubling(logK, vector<int>(n));
-  rep(i, n) { doubling[0][i] = a[i]; }
-  // 前処理 doubling の計算
-  rep(k, logK - 1) {
+  int logk = 1;
+  while ((1LL << logk) < K) logk++;
+  // doubling[k][i]: i番目から2^k進んだ町
+  vector<vector<int> > doubling(logk, vector<int>(n));
+  rep(i, n) doubling[0][i] = a[i];
+  rep(k, logk - 1) {
     rep(i, n) doubling[k + 1][i] = doubling[k][doubling[k][i]];
   }
 
@@ -42,4 +41,5 @@ int main() {
     K = K >> 1;
   }
   cout << now + 1 << endl;
+  return 0;
 }
