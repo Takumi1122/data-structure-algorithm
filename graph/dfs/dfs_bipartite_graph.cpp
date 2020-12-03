@@ -24,11 +24,9 @@ bool dfs(const Graph &G, int v, int cur = 0) {
 }
 
 int main() {
-  // 頂点数と辺数
   int n, m;
   cin >> n >> m;
 
-  // グラフ入力受取
   Graph G(n);
   rep(i, m) {
     int a, b;
@@ -39,11 +37,10 @@ int main() {
     G[b].push_back(a);
   }
 
-  // 探索
   color.assign(n, -1);
   bool is_bipartite = true;
   rep(v, n) {
-    if (color[v] != -1) continue;  // v が探索済みだったらスルー
+    if (color[v] != -1) continue;
     if (!dfs(G, v)) is_bipartite = false;
   }
 

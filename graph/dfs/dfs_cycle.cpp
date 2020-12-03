@@ -40,26 +40,22 @@ void dfs(const Graph &G, int v, int p) {
 }
 
 int main() {
-  // 頂点数 (サイクルを一つ含むグラフなので辺数は N で確定)
   int n;
   cin >> n;
 
-  // グラフ入力受取
   Graph G(n);
   rep(i, n) {
     int a, b;
     cin >> a >> b;
-    --a, --b;  // 頂点番号が 1-indexed で与えられるので 0-indexed にする
+    --a, --b;
     G[a].push_back(b);
     G[b].push_back(a);
   }
 
-  // 探索
   seen.assign(n, false), finished.assign(n, false);
   pos = -1;
   dfs(G, 0, -1);
 
-  // サイクルを復元
   set<int> cycle;
   while (!hist.empty()) {
     int t = hist.top();
@@ -68,7 +64,6 @@ int main() {
     if (t == pos) break;
   }
 
-  // クエリに答える
   int q;
   cin >> q;
   rep(i, q) {

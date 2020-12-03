@@ -10,21 +10,18 @@ using Graph = vector<vector<int>>;
 // 深さ優先探索
 vector<bool> seen;
 void dfs(const Graph &G, int v) {
-  seen[v] = true;  // v を訪問済にする
+  seen[v] = true;
 
-  // v から行ける各頂点 next_v について
-  for (auto next_v : G[v]) {
-    if (seen[next_v]) continue;  // next_v が探索済だったらスルー
-    dfs(G, next_v);              // 再帰的に探索
+  for (auto nv : G[v]) {
+    if (seen[nv]) continue;
+    dfs(G, nv);
   }
 }
 
 int main() {
-  // 頂点数と辺数、s と t
   int n, m, s, t;
   cin >> n >> m >> s >> t;
 
-  // グラフ入力受取
   Graph G(n);
   rep(i, m) {
     int a, b;
@@ -36,11 +33,9 @@ int main() {
   s--;
   t--;
 
-  // 頂点 s をスタートとした探索
-  seen.assign(n, false);  // 全頂点を「未訪問」に初期化
+  seen.assign(n, false);
   dfs(G, s);
 
-  // t に辿り着けるかどうか
   if (seen[t])
     cout << "Yes" << endl;
   else
