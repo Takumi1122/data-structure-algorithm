@@ -12,16 +12,11 @@ using P = pair<int, int>;
       https://atcoder.jp/contests/abc150/tasks/abc150_d
 */
 
-ll gcd(ll x, ll y) {
-  if (y == 0)
-    return x;
-  else
-    return gcd(y, x % y);
-}
+ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
+ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
 ll solve(int n, ll m, vector<ll> &a) {
-  // 2 で割れるだけ割る (割れる回数が異なったらダメ)
-  bool same = true;
+  // 2で割れるだけ割る(割れる回数が異なったらダメ)
   while (a[0] % 2 == 0) {
     rep(i, n) {
       if (a[i] % 2 != 0) return 0;
@@ -32,13 +27,12 @@ ll solve(int n, ll m, vector<ll> &a) {
   rep(i, n) if (a[i] % 2 == 0) return 0;
 
   // lcm
-  ll lcm = 1;
+  ll lc = 1;
   rep(i, n) {
-    ll g = gcd(lcm, a[i]);
-    lcm = lcm / g * a[i];
-    if (lcm > m) return 0;
+    lc = lcm(lc, a[i]);
+    if (lc > m) return 0;
   }
-  return (m / lcm + 1) / 2;
+  return (m / lc + 1) / 2;
 }
 
 int main() {
@@ -47,7 +41,7 @@ int main() {
   cin >> n >> m;
   vector<ll> a(n);
 
-  // あらかじめ a は一回 2 で割っておく
+  // あらかじめaは一回2で割っておく
   rep(i, n) cin >> a[i], a[i] /= 2;
   cout << solve(n, m, a) << endl;
 }
