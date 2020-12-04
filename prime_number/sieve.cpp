@@ -60,6 +60,7 @@ struct mint {
 // n以下の素数を全て見つけ出す高速な方法
 struct Sieve {
   int n;
+  // primes: n以下の素数
   vector<int> f, primes;
   Sieve(int n = 1) : n(n), f(n + 1) {
     f[0] = f[1] = -1;
@@ -81,6 +82,7 @@ struct Sieve {
     }
     return res;
   }
+  // 素因数分解 O(log(n))
   vector<P> factor(int x) {
     vector<int> fl = factorList(x);
     if (fl.size() == 0) return {};
