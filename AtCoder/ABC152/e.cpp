@@ -4,6 +4,14 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 素因数分解による最小公倍数
+
+/*
+    参考リンク
+    ABC 152 E - Flatten
+      https://atcoder.jp/contests/abc152/tasks/abc152_e
+*/
+
 const int mod = 1000000007;
 struct mint {
   ll x;  // typedef long long ll;

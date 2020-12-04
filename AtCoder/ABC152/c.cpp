@@ -1,24 +1,21 @@
 #include <bits/stdc++.h>
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
-using ll = long long;
-using P = pair<int, int>;
+typedef long long ll;
 
 int main() {
   int n;
   cin >> n;
   vector<int> p(n);
   rep(i, n) cin >> p[i];
-  int mn = 0;
-  int sum = n;
 
+  int ans = 0;
+  int mn = 1e9;
   rep(i, n) {
-    mn = *min_element(p.begin(), p.begin() + i);
-    if (p[i] > mn) {
-      sum--;
-    }
+    mn = min(mn, p[i]);
+    if (mn == p[i]) ans++;
   }
 
-  cout << sum << endl;
+  cout << ans << endl;
   return 0;
 }
