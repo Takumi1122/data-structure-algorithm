@@ -5,15 +5,9 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  ll h;
-  cin >> h;
-
-  ll cnt = 0, teki = 1;
-  while (h) {
-    h /= 2;
-    cnt += teki;
-    teki *= 2;
-  }
-  cout << cnt << endl;
+  int h, a;
+  cin >> h >> a;
+  int ans = (h + a - 1) / a;
+  cout << ans << endl;
   return 0;
 }

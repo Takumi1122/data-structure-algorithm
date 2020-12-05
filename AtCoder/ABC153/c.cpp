@@ -9,14 +9,12 @@ int main() {
   cin >> n >> k;
   vector<int> h(n);
   rep(i, n) cin >> h[i];
-
   sort(h.begin(), h.end());
-  ll c = 0;
-  if (n <= k) {
-    cout << 0 << endl;
-  } else {
-    rep(i, n - k) c += h[i];
-    cout << c << endl;
-  }
+
+  k = min(n, k);
+  ll ans = 0;
+  rep(i, k) h.pop_back();
+  rep(i, h.size()) ans += h[i];
+  cout << ans << endl;
   return 0;
 }
