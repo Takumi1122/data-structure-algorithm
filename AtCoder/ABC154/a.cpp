@@ -5,19 +5,17 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int n;
-  cin >> n;
-  set<int> s;
-  rep(i, n) {
-    int a;
-    cin >> a;
-    s.insert(a);
-  }
+  string s, t;
+  int a, b;
+  string u;
+  cin >> s >> t;
+  cin >> a >> b;
+  cin >> u;
 
-  if (s.size() == n) {
-    cout << "YES" << endl;
+  if (s == u) {
+    cout << a - 1 << " " << b << endl;
   } else {
-    cout << "NO" << endl;
+    cout << a << " " << b - 1 << endl;
   }
   return 0;
 }

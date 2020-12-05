@@ -4,6 +4,14 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 期待値 1*(1/p)+2*(1/p)+...+p*(1/p) = (p + 1)/2
+
+/*
+    参考リンク
+    ABC 154 D - Dice in Line
+      https://atcoder.jp/contests/abc154/tasks/abc154_d
+*/
+
 int main() {
   int n, k;
   cin >> n >> k;
@@ -15,14 +23,13 @@ int main() {
 
   vector<double> sum(n + 1);
   rep(i, n) sum[i + 1] = sum[i] + p[i];
-  double mx = 0;
 
+  double ans = 0;
   for (int i = 0; i <= n - k; ++i) {
-    double var = sum[k + i] - sum[i];
-    mx = max(var, mx);
+    double ev = sum[k + i] - sum[i];
+    ans = max(ans, ev);
   }
 
-  cout << fixed << setprecision(10) << mx << endl;
-
+  printf("%.15f\n", ans);
   return 0;
 }
