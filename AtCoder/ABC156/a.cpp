@@ -7,6 +7,7 @@ using P = pair<int, int>;
 int main() {
   int n, r;
   cin >> n >> r;
+
   int ans;
   if (n >= 10) {
     cout << r << endl;
@@ -14,6 +15,5 @@ int main() {
     ans = r + 100 * (10 - n);
     cout << ans << endl;
   }
-
   return 0;
 }

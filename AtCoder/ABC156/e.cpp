@@ -68,12 +68,17 @@ struct combination {
 int main() {
   int n, k;
   cin >> n >> k;
+
   k = min(k, n - 1);
   combination c(n);
   mint ans;
   for (int i = 0; i <= k; i++) {
-    ans += c(n, i) * c((n - i - 1) + i, i);
+    // c(n,i): どの部屋を0人にするかの選び方
+    // c((n-i-1)+i, i): 0人以外の部屋(n-i)に対して移動するi人を振り分ける
+    // 重複組み合わせ: c((n-i)+i-1,i)
+    ans += c(n, i) * c((n - i) + i - 1, i);
   }
+
   cout << ans.x << endl;
   return 0;
 }

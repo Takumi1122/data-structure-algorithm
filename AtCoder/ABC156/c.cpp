@@ -9,12 +9,13 @@ int main() {
   cin >> n;
   vector<int> x(n);
   rep(i, n) cin >> x[i];
-  int mn = (1e8);
-  for (int i = 1; i <= 600; ++i) {
-    int sum = 0;
-    rep(j, n) sum += (x[j] - i) * (x[j] - i);
-    mn = min(mn, sum);
+
+  int ans = 1001001001;
+  for (int p = 1; p <= 100; ++p) {
+    int now = 0;
+    rep(i, n) now += (x[i] - p) * (x[i] - p);
+    ans = min(ans, now);
   }
-  cout << mn << endl;
+  cout << ans << endl;
   return 0;
 }
