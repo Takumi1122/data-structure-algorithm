@@ -34,7 +34,7 @@ int main() {
   while (l + 1 < r) {
     ll x = (l + r) / 2;
     bool ok = [&] {
-      // x未満の個数
+      // x以下の個数
       ll tot = 0;
 
       // a[i]を固定
@@ -43,7 +43,7 @@ int main() {
           int l = -1, r = n;
           while (l + 1 < r) {
             int c = (l + r) / 2;
-            if (a[i] * a[c] < x)
+            if (a[i] * a[c] <= x)
               r = c;
             else
               l = c;
@@ -53,7 +53,7 @@ int main() {
           int l = -1, r = n;
           while (l + 1 < r) {
             int c = (l + r) / 2;
-            if (a[i] * a[c] < x)
+            if (a[i] * a[c] <= x)
               l = c;
             else
               r = c;
@@ -61,22 +61,22 @@ int main() {
           tot += (l + 1);
         }
         // 自分自身を選ぶ場合を除外
-        if (a[i] * a[i] < x) tot--;
+        if (a[i] * a[i] <= x) tot--;
       }
 
       // 重複を除外
       tot /= 2;
 
-      // x未満の数はk個未満か
-      return tot < k;
+      // x以下の数はk個以上か
+      return tot >= k;
     }();
 
     if (ok)
-      l = x;
-    else
       r = x;
+    else
+      l = x;
   }
 
-  cout << l << endl;
+  cout << r << endl;
   return 0;
 }

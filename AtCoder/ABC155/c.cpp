@@ -4,31 +4,29 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// std::mapの内部ではキーが昇順になるよう要素がソートされている
+
+/*
+    参考リンク
+    ABC 155 C - Poll
+      https://atcoder.jp/contests/abc155/tasks/abc155_c
+*/
+
 int main() {
   int n;
   cin >> n;
-  vector<string> s(n);
-  map<string, int> m;
+  map<string, int> mp;
   rep(i, n) {
-    cin >> s[i];
-    if (m.count(s[i]) != 0) {
-      m[s[i]]++;
-    } else {
-      m.insert(make_pair(s[i], 1));
-    }
+    string s;
+    cin >> s;
+    mp[s]++;
   }
 
   int mx = 0;
-
-  for (auto it = m.begin(); it != m.end(); ++it) {
-    mx = max(it->second, mx);
+  for (auto p : mp) mx = max(mx, p.second);
+  for (auto p : mp) {
+    if (p.second != mx) continue;
+    cout << p.first << endl;
   }
-
-  for (auto it = m.begin(); it != m.end(); ++it) {
-    if (it->second == mx) {
-      cout << it->first << endl;
-    }
-  }
-
   return 0;
 }
