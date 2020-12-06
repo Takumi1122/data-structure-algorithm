@@ -80,10 +80,12 @@ mint choose(int n, int a) {
 int main() {
   int n, a, b;
   cin >> n >> a >> b;
+
   mint ans = f(n);
   ans -= 1;
   ans -= choose(n, a);
   ans -= choose(n, b);
+
   cout << ans.x << endl;
   return 0;
 }
