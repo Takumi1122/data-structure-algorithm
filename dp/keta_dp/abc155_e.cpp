@@ -21,6 +21,7 @@ int main() {
   string s;
   cin >> s;
 
+  // 下の桁から見ていくため
   reverse(s.begin(), s.end());
   s += '0';
   int n = s.size();
