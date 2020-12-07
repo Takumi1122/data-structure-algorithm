@@ -1,32 +1,46 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-long long N;
-string S;
-int P;
+// 区間に関する問題において、累積和的なものを考える
+// (al - ar) / 10^r
+// 互いに素かどうか
 
-long long solve() {
-  if (P == 2 || P == 5) {
-    long long res = 0;
-    for (int i = 0; i < N; ++i)
-      if ((S[N - i - 1] - '0') % P == 0) res += N - i;
-    return res;
-  }
-  vector<long long> val(P, 0);
-  long long tenfactor = 1;
-  long long cur = 0;
-  val[cur]++;
-  for (int i = 0; i < N; ++i) {
-    cur = (cur + (S[N - i - 1] - '0') * tenfactor) % P;
-    tenfactor = (tenfactor * 10) % P;
-    val[cur]++;
-  }
-  long long res = 0;
-  for (int p = 0; p < P; ++p) res += val[p] * (val[p] - 1) / 2;
-  return res;
-}
+/*
+    参考リンク
+    ABC158 E - Divisible Substring
+      https://atcoder.jp/contests/abc158/tasks/abc158_e
+*/
 
 int main() {
-  cin >> N >> P >> S;
-  cout << solve() << endl;
+  ll n, p;
+  string s;
+  cin >> n >> p >> s;
+
+  // 素数2,5は10と互いに素ではない
+  if (p == 2 || p == 5) {
+    // 2の倍数: 下1桁が偶数であること
+    // 5の倍数: 下1桁が0または5であること
+    ll ans = 0;
+    rep(i, n) if ((s[n - i - 1] - '0') % p == 0) ans += n - i;
+    cout << ans << endl;
+    return 0;
+  }
+
+  vector<ll> val(p, 0);
+  ll tenfactor = 1;
+  ll now = 0;
+  val[now]++;
+  // 文字列の右側からv個分からなる整数についてのmod
+  rep(i, n) {
+    now = (now + (s[n - i - 1] - '0') * tenfactor) % p;
+    tenfactor = (tenfactor * 10) % p;
+    val[now]++;
+  }
+  ll ans = 0;
+  rep(i, p) ans += val[i] * (val[i] - 1) / 2;
+  cout << ans << endl;
+  return 0;
 }

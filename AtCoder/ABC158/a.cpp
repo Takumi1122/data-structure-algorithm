@@ -1,23 +1,16 @@
 #include <bits/stdc++.h>
-#define rep(i, n) for (int i = 0; i < (n); i++)
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int c;
-  string S;
-  cin >> S;
+  string s;
+  cin >> s;
 
-  rep(i, 3) {
-    if(S[i] == 'A') ++c;
-  } 
-
-  if(c == 3 || c == 0) {
+  if (s == "AAA" || s == "BBB")
     cout << "No" << endl;
-  } else {
+  else
     cout << "Yes" << endl;
-  }
-
   return 0;
 }

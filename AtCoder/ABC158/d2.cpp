@@ -4,12 +4,21 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC158 D - String Formation
+      https://atcoder.jp/contests/abc158/tasks/abc158_d
+*/
+
 int main() {
   string s;
   cin >> s;
   deque<char> q;
   for (char c : s) q.push_back(c);
+
+  // 文字列sの前後が反転しているか
   bool flip = false;
+
   int Q;
   cin >> Q;
   rep(qi, Q) {
@@ -29,6 +38,7 @@ int main() {
       }
     }
   }
+
   if (flip) reverse(q.begin(), q.end());
   string ans;
   for (char c : q) ans += c;
