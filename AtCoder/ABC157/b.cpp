@@ -1,55 +1,36 @@
-#include <algorithm>
-#include <iostream>
-#include <string>
-#include <vector>
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-int N;
-int A[3][3];
-int B[15];
-vector<int> C;
-
-bool contain(int a, int b, int c, vector<int> &C) {
-  auto itr1 = find(C.begin(), C.end(), a);
-  size_t index1 = distance(C.begin(), itr1);
-  auto itr2 = find(C.begin(), C.end(), b);
-  size_t index2 = distance(C.begin(), itr2);
-  auto itr3 = find(C.begin(), C.end(), c);
-  size_t index3 = distance(C.begin(), itr3);
-  if (index1 != C.size() && index2 != C.size() &&
-      index3 != C.size()) {  // 発見できたとき
-    return true;
-  } else {  // 発見できなかったとき
-    return false;
-  }
-}
+int a[3][3], b[10];
+bool ap[3][3];
 
 int main() {
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) cin >> A[i][j];
+  rep(i, 3) rep(j, 3) cin >> a[i][j];
+  int n;
+  cin >> n;
+  rep(i, n) cin >> b[i];
+
+  rep(i, 3) rep(j, 3) rep(k, n) {
+    if (a[i][j] == b[k]) ap[i][j] = true;
   }
 
-  cin >> N;
-  for (int i = 0; i < N; i++) cin >> B[i];
-
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      for (int k = 0; k < N; k++) {
-        if (A[i][j] == B[k]) {
-          C.push_back((i + 1) * 10 + (j + 1));
-        }
-      }
-    }
+  bool ok = false;
+  rep(i, 3) {
+    if (ap[i][0] && ap[i][1] && ap[i][2]) ok = true;
   }
+  rep(i, 3) {
+    if (ap[0][i] && ap[1][i] && ap[2][i]) ok = true;
+  }
+  if (ap[0][0] && ap[1][1] && ap[2][2]) ok = true;
+  if (ap[0][2] && ap[1][1] && ap[2][0]) ok = true;
 
-  bool judge = (contain(11, 12, 13, C) || contain(21, 22, 23, C) ||
-                contain(31, 32, 33, C) || contain(11, 22, 33, C) ||
-                contain(13, 22, 31, C) || contain(11, 21, 31, C) ||
-                contain(12, 22, 32, C) || contain(13, 23, 33, C));
-
-  if (judge) {
+  if (ok) {
     cout << "Yes" << endl;
   } else {
     cout << "No" << endl;
   }
+  return 0;
 }

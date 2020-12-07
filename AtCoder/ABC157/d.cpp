@@ -1,5 +1,14 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
+
+/*
+    参考リンク
+    ABC157 D - Friend Suggestions
+      https://atcoder.jp/contests/abc157/tasks/abc157_d
+*/
 
 struct UnionFind {
   vector<int> par;
@@ -28,13 +37,14 @@ struct UnionFind {
   int size(int x) { return -par[root(x)]; }
 };
 
-using pint = pair<int, int>;
 int main() {
-  int N, M, K;
-  cin >> N >> M >> K;
-  vector<set<int> > dame(N);
-  UnionFind uf(N);
-  for (int i = 0; i < M; ++i) {
+  int n, m, k;
+  cin >> n >> m >> k;
+
+  vector<set<int> > dame(n);
+  UnionFind uf(n);
+
+  rep(i, m) {
     int a, b;
     cin >> a >> b;
     --a, --b;
@@ -42,7 +52,8 @@ int main() {
     dame[b].insert(a);
     uf.merge(a, b);
   }
-  for (int i = 0; i < K; ++i) {
+
+  rep(i, k) {
     int c, d;
     cin >> c >> d;
     --c, --d;
@@ -51,7 +62,7 @@ int main() {
     dame[d].insert(c);
   }
 
-  for (int i = 0; i < N; ++i) {
+  rep(i, n) {
     int mem = uf.size(i) - 1;  // 同じ連結成分の「自分以外」の人数
     mem -= dame[i].size();  // その中ですでに友達かブロック関係の人数
     cout << mem << " ";

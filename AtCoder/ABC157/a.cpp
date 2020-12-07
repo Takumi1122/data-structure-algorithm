@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
 int main() {
-  int N;
-  cin >> N;
+  int n;
+  cin >> n;
 
-  int ans = (N + 1) / 2;  // ceil(N/2) 切り上げ
+  int ans = (n + 1) / 2;  // ceil(n/2) 切り上げ
   cout << ans << endl;
   return 0;
 }
