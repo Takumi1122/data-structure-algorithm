@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC157 D - Friend Suggestions
+      https://atcoder.jp/contests/abc157/tasks/abc157_d
+*/
+
 struct UnionFind {
   vector<int> par;
 
@@ -31,12 +37,13 @@ struct UnionFind {
   int size(int x) { return -par[root(x)]; }
 };
 
-using pint = pair<int, int>;
 int main() {
   int n, m, k;
   cin >> n >> m >> k;
+
   vector<set<int> > dame(n);
   UnionFind uf(n);
+
   rep(i, m) {
     int a, b;
     cin >> a >> b;
@@ -45,6 +52,7 @@ int main() {
     dame[b].insert(a);
     uf.merge(a, b);
   }
+
   rep(i, k) {
     int c, d;
     cin >> c >> d;
