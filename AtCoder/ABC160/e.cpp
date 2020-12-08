@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 160 E - Red and Green Apples
+      https://atcoder.jp/contests/abc160/tasks/abc160_e
+*/
+
 int main() {
   int x, y;
   cin >> x >> y;
@@ -13,6 +19,7 @@ int main() {
   rep(i, a) cin >> p[i];
   rep(i, b) cin >> q[i];
   rep(i, c) cin >> r[i];
+
   sort(p.rbegin(), p.rend());
   sort(q.rbegin(), q.rend());
   vector<int> d;
@@ -22,6 +29,7 @@ int main() {
   sort(d.rbegin(), d.rend());
   ll ans = 0;
   rep(i, x + y) ans += d[i];
+
   cout << ans << endl;
   return 0;
 }

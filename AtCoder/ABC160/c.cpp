@@ -7,22 +7,14 @@ using P = pair<int, int>;
 int main() {
   int k, n;
   cin >> k >> n;
-  vector<int> A(n);
-  rep(i, n) { cin >> A[i]; }
-  sort(A.begin(), A.end());
-  vector<int> D(n);
-  rep(i, n) {
-    if (i < n - 1) {
-      D[i] = abs(A[i] - A[i + 1]);
-    } else {
-      D[i] = abs(A[i] - k) + A[0];
-    }
-  }
-  sort(D.begin(), D.end());
-  D.pop_back();
-  int d = 0;
-  int n1 = n - 1;
-  rep(i, n1) { d += D[i]; }
-  cout << d << endl;
+  vector<int> a(n);
+  rep(i, n) cin >> a[i];
+
+  a.push_back(a[0] + k);
+  int l = 0;
+  rep(i, n) l = max(l, a[i + 1] - a[i]);
+  int ans = k - l;
+
+  cout << ans << endl;
   return 0;
 }

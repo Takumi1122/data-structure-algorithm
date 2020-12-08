@@ -3,30 +3,16 @@
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
+
 int main() {
-  int h = 0;
-  ll x;
+  int x;
   cin >> x;
-  while (x > 0) {
-    if (x - 500 >= 0) {
-      h += 1000;
-      x -= 500;
-    } else if (x - 100 >= 0) {
-      h += 100;
-      x -= 100;
-    } else if (x - 50 >= 0) {
-      h += 50;
-      x -= 50;
-    } else if (x - 10 >= 0) {
-      h += 10;
-      x -= 10;
-    } else if (x - 5 >= 0) {
-      h += 5;
-      x -= 5;
-    } else {
-      break;
-    }
-  }
-  cout << h << endl;
+
+  int c500 = x / 500;
+  x -= c500 * 500;
+  int c5 = x / 5;
+  int ans = c500 * 1000 + c5 * 5;
+
+  cout << ans << endl;
   return 0;
 }
