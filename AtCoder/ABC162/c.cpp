@@ -4,39 +4,28 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-int GCD(int a, int b) {
-  if (b == 0)
-    return a;
-  else
-    return GCD(b, a % b);
-}
+/*
+    参考リンク
+    ABC 162 C - Sum of gcd of Tuples (Easy)
+      https://atcoder.jp/contests/abc162/tasks/abc162_c
+*/
 
-int gcd(int a, int b, int c) {
-  int N = 3;
-  int g = 0;
-  for (int i = 0; i < N; ++i) {
-    if (i == 0) {
-      g = GCD(g, a);
-    } else if (i == 1) {
-      g = GCD(g, b);
-    } else {
-      g = GCD(g, c);
-    }
-  }
-  return g;
-}
+ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
+ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
 int main() {
   int k;
-  ll s = 0;
   cin >> k;
-  for (int i = 1; i <= k; ++i) {
-    for (int j = 1; j <= k; ++j) {
-      for (int t = 1; t <= k; ++t) {
-        s += gcd(i, j, t);
+
+  ll ans = 0;
+  for (int a = 1; a <= k; ++a) {
+    for (int b = 1; b <= k; ++b) {
+      for (int c = 1; c <= k; ++c) {
+        ans += gcd(gcd(a, b), c);
       }
     }
   }
-  cout << s << endl;
+
+  cout << ans << endl;
   return 0;
 }

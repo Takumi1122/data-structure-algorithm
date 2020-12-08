@@ -7,7 +7,8 @@ using P = pair<int, int>;
 int main() {
   int n;
   cin >> n;
-  ll s = 0;
+
+  ll sum = 0;
   for (int i = 1; i <= n; ++i) {
     if (i % 3 == 0 && i % 5 == 0) {
       continue;
@@ -16,9 +17,9 @@ int main() {
     } else if (i % 5 == 0) {
       continue;
     } else {
-      s += i;
+      sum += i;
     }
   }
-  cout << s << endl;
+  cout << sum << endl;
   return 0;
 }

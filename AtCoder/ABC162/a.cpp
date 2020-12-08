@@ -5,20 +5,15 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int n;
-  bool b = false;
-  cin >> n;
-  while (n) {
-    if (n % 10 == 7) {
-      b = true;
-    }
-    n /= 10;
-  }
+  string s;
+  cin >> s;
 
-  if (b) {
-    cout << "Yes" << endl;
-  } else {
-    cout << "No" << endl;
+  rep(i, s.size()) {
+    if (s[i] == '7') {
+      cout << "Yes" << endl;
+      return 0;
+    }
   }
+  cout << "No" << endl;
   return 0;
 }

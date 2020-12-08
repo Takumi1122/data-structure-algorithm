@@ -4,31 +4,40 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 162 D - RGB Triplets
+      https://atcoder.jp/contests/abc162/tasks/abc162_d
+*/
+
 int main() {
   int n;
   string s;
-  cin >> n;
-  cin >> s;
-  int c1 = 0;
-  vector<vector<int>> x(1000);
-  for (int i = 123; i < 1000; ++i) {
-    if (i % 10 > (i / 10) % 10 > ((i / 10) / 10) % 10 &&
-        i % 10 - (i / 10) % 10 != (i / 10) % 10 - ((i / 10) / 10) % 10) {
-      x[c1][0] = ((i / 10) / 10) % 10;
-      x[c1][1] = (i / 10) % 10;
-      x[c1][2] = i % 10;
-      c1++;
+  cin >> n >> s;
+
+  ll r = 0, g = 0, b = 0;
+  for (auto c : s) {
+    if (c == 'R')
+      ++r;
+    else if (c == 'G')
+      ++g;
+    else
+      ++b;
+  }
+  // s[i],s[j],s[k]が異なるもの
+  ll all = r * g * b;
+  // 「s[i],s[j],s[k]が異なる」かつ「j-i=k-jである」
+  ll sub = 0;
+  for (int i = 0; i < n; ++i) {
+    for (int j = i + 1; j < n; ++j) {
+      if (s[i] == s[j]) continue;
+      // j-i=k-j => k = 2*j-i
+      int k = j * 2 - i;
+      if (k >= n || s[k] == s[i] || s[k] == s[j]) continue;
+      ++sub;
     }
   }
 
-  int c2 = 0;
-  for (int i = 0; i < x.size(); ++i) {
-    if (s.size() >= x[i][2] && s[x[i][0]] != s[x[i][1]] &&
-        s[x[i][0]] != s[x[i][2]] && s[x[i][1]] != s[x[i][2]]) {
-      c2++;
-    }
-  }
-  cout << c2 << endl;
-
+  cout << all - sub << endl;
   return 0;
 }
