@@ -13,9 +13,7 @@ using P = pair<int, int>;
 */
 
 void rec(int d, ll val, vector<ll> &all) {
-  // 格納
   all.push_back(val);
-
   // 10 桁だったらそれ以上やらずに打ち切り
   if (d == 10) return;
 
@@ -29,12 +27,11 @@ void rec(int d, ll val, vector<ll> &all) {
 int main() {
   int k;
   cin >> k;
+
   vector<ll> all;
   for (int v = 1; v < 10; ++v) rec(1, v, all);
-
-  // 小さい順に並び替える
   sort(all.begin(), all.end());
 
-  // K 番目
   cout << all[k - 1] << endl;
+  return 0;
 }
