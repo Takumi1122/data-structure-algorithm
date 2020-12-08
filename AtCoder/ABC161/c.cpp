@@ -7,13 +7,8 @@ using P = pair<int, int>;
 int main() {
   ll n, k;
   cin >> n >> k;
-  if (n % k == 0) {
-    cout << 0 << endl;
-  } else if (n <= k) {
-    cout << min(n, abs(n - k)) << endl;
-  } else {
-    ll a = n % k;
-    cout << min(a, abs(a - k)) << endl;
-  }
+  ll a = n % k;
+  ll ans = min(a, k - a);
+  cout << ans << endl;
   return 0;
 }

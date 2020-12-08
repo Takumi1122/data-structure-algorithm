@@ -6,35 +6,25 @@ using P = pair<int, int>;
 
 int main() {
   int k;
-  int c = 0;
   cin >> k;
   vector<ll> a;
-  rep(i, 3234566667) {
-    int num, mod;
-    int j = 0;
-    bool b = true;
-    vector<int> p;
-    while (num >= 1) {
-      mod = num % 10;  // 一の位の余り
-      num = num / 10;  // 取得済みの余りを"num"から除去
-      p[j++] = mod;
+  for (int i = 1; i <= 9; ++i) a.push_back(i);
+  while (1) {
+    if (k <= a.size()) {
+      cout << a[k - 1] << endl;
+      return 0;
     }
-    rep(t, p.size() - 1) {
-      if (i < 10) {
-        break;
+    k -= a.size();
+    vector<ll> old;
+    swap(old, a);
+    for (ll x : old) {
+      for (int i = -1; i <= 1; ++i) {
+        int d = x % 10 + i;
+        if (d < 0 || d > 9) continue;
+        ll nx = x * 10 + d;
+        a.push_back(nx);
       }
-      if (abs(p[t] - p[t + 1]) > 1) {
-        b = false;
-        break;
-      }
-    }
-    if (b == true) {
-      a[c] = i;
-      c++;
     }
   }
-
-  cout << a[k - 1] << endl;
-
   return 0;
 }
