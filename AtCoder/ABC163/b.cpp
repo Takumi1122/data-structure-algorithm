@@ -9,10 +9,11 @@ int main() {
   cin >> n >> m;
   vector<int> a(m);
   rep(i, m) cin >> a[i];
-  int c = -1;
-  int sum = 0;
+
+  ll sum = 0;
+  ll ans = -1;
   rep(i, m) sum += a[i];
-  if (sum <= n) c = n - sum;
-  cout << c << endl;
+  if (sum <= n) ans = n - sum;
+  cout << ans << endl;
   return 0;
 }

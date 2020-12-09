@@ -4,13 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-const double PI = 3.14159;
+const double PI = acosl(-1.0);
 
 int main() {
   int r;
   cin >> r;
-  double l;
-  l = 2 * PI * r;
-  cout << l << endl;
+  double ans = 2 * PI * r;
+  printf("%.15f\n", ans);
   return 0;
 }

@@ -1,42 +1,37 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
-template <class T>
-inline bool chmax(T& a, T b) {
-  if (a < b) {
-    a = b;
-    return 1;
-  }
-  return 0;
-}
-template <class T>
-inline bool chmin(T& a, T b) {
-  if (a > b) {
-    a = b;
-    return 1;
-  }
-  return 0;
-}
+using ll = long long;
+using P = pair<int, int>;
 
-using pll = pair<long long, long long>;
+const ll INF = 1e18;
+const int MX = 2005;
+// dp[i][l]:
+// 大きい方からi個まで左右を決めて,左をl回,右をr(i-l)回使ったときの最大値
+ll dp[MX][MX];
+inline void chmax(ll& a, ll b) { a = max(a, b); }
+
 int main() {
-  int N;
-  cin >> N;
-  vector<pll> A(N);
-  for (int i = 0; i < N; ++i) cin >> A[i].first, A[i].second = i;
-  sort(A.begin(), A.end(), greater<pll>());
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, n) cin >> a[i];
 
-  vector<vector<long long>> dp(N + 1, vector<long long>(N + 1, 0));
-  for (int i = 0; i < N; ++i) {
-    for (int j = 0; i + j < N; ++j) {
-      // left
-      chmax(dp[i + 1][j], dp[i][j] + A[i + j].first * (A[i + j].second - i));
-
-      // right
-      chmax(dp[i][j + 1],
-            dp[i][j] + A[i + j].first * ((N - 1 - j) - A[i + j].second));
+  dp[0][0] = 0;
+  vector<P> p;
+  rep(i, n) p.emplace_back(a[i], i);
+  sort(p.rbegin(), p.rend());
+  rep(i, n) {
+    int pi = p[i].second;
+    rep(l, i + 1) {
+      int r = i - l;
+      chmax(dp[i + 1][l + 1], dp[i][l] + ll(pi - l) * a[pi]);
+      chmax(dp[i + 1][l], dp[i][l] + ll((n - r - 1) - pi) * a[pi]);
     }
   }
-  long long res = 0;
-  for (int i = 0; i <= N; ++i) chmax(res, dp[i][N - i]);
-  cout << res << endl;
+
+  ll ans = 0;
+  rep(i, n + 1) chmax(ans, dp[n][i]);
+  cout << ans << endl;
+  return 0;
 }

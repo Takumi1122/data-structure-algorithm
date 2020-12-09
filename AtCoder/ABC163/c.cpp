@@ -8,14 +8,11 @@ int main() {
   int n;
   cin >> n;
   vector<int> a(n);
-  for (int i = 0; i < n - 1; i++) cin >> a[i];
+  rep(i, n - 1) cin >> a[i];
+
   vector<int> c(n);
+  rep(i, n - 1) c[a[i] - 1]++;
 
-  for (int i = 0; i < n - 1; i++) {
-    c[a[i] - 1]++;
-  }
-
-  rep(i, n) { printf("%d\n", c[i]); }
-
+  rep(i, n) cout << c[i] << endl;
   return 0;
 }
