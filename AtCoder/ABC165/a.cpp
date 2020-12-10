@@ -8,10 +8,12 @@ int main() {
   int k, a, b;
   cin >> k;
   cin >> a >> b;
+
   bool ok = false;
   for (int i = a; i <= b; i++) {
     if (i % k == 0) ok = true;
   }
+
   if (ok) {
     cout << "OK" << endl;
   } else {

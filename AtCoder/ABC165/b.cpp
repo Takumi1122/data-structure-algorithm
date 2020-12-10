@@ -7,12 +7,13 @@ using P = pair<int, int>;
 int main() {
   ll x;
   cin >> x;
-  ll a = 100;
-  int y = 0;
+
+  ll ans = 0, a = 100;
   while (a < x) {
-    a = a * 1.01;
-    y++;
+    a += a / 100;
+    ++ans;
   }
-  cout << y << endl;
+
+  cout << ans << endl;
   return 0;
 }

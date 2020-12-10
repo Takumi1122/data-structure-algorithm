@@ -4,6 +4,14 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// リーグ戦に関するアルゴリズム
+
+/*
+    参考リンク
+    ABC 165 E - Rotation Matching
+      https://atcoder.jp/contests/abc165/tasks/abc165_e
+*/
+
 int main() {
   int n, m;
   cin >> n >> m;
@@ -22,6 +30,6 @@ int main() {
       ans.emplace_back(l, r);
     }
   }
-  rep(i, m) { printf("%d %d\n", ans[i].first, ans[i].second); }
+  rep(i, m) printf("%d %d\n", ans[i].first, ans[i].second);
   return 0;
 }
