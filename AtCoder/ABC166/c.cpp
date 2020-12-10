@@ -8,31 +8,19 @@ int main() {
   int n, m;
   cin >> n >> m;
   vector<int> h(n);
+  vector<bool> ok(n, true);
   rep(i, n) cin >> h[i];
-  vector<vector<int> > g(n);
   rep(i, m) {
     int a, b;
     cin >> a >> b;
-    a--;
-    b--;
-    g[a].push_back(b);
-    g[b].push_back(a);
+    --a;
+    --b;
+    if (h[a] <= h[b]) ok[a] = false;
+    if (h[b] <= h[a]) ok[b] = false;
   }
 
   int ans = 0;
-  rep(i, n) {
-    if (g[i].size() == 0) {
-      ans++;
-      continue;
-    }
-    int cnt = 0;
-    for (int j = 0; j < g[i].size(); j++) {
-      if (h[i] > h[g[i][j]]) {
-        cnt++;
-      }
-    }
-    if (cnt == g[i].size()) ans++;
-  }
+  rep(i, n) if (ok[i]) ans++;
   cout << ans << endl;
   return 0;
 }

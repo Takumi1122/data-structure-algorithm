@@ -7,6 +7,7 @@ using P = pair<int, int>;
 int main() {
   string s;
   cin >> s;
+
   if (s == "ABC") {
     cout << "ARC" << endl;
   } else {
