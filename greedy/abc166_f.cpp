@@ -36,10 +36,12 @@ int main() {
   rep(i, n) {
     int a = q[i].first;
     int b = q[i].second;
+
     if (!d[a] && !d[b]) {
       cout << "No" << endl;
       return 0;
     }
+
     if (!d[a]) {
       add(a, b);
     } else if (!d[b]) {
