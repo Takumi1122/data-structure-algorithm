@@ -7,6 +7,7 @@ using P = pair<int, int>;
 int main() {
   ll a, b, c, k;
   cin >> a >> b >> c >> k;
+
   ll mx;
   if (a >= k) {
     mx = k;

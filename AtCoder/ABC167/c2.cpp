@@ -4,8 +4,13 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-const int INF = 1001001001;
+/*
+    参考リンク
+    ABC 167 C - Skill Up
+      https://atcoder.jp/contests/abc167/tasks/abc167_c
+*/
 
+const int INF = 1001001001;
 int a[12][12];
 
 int main() {
@@ -31,6 +36,7 @@ int main() {
     rep(j, m) if (d[j] < x) ok = false;
     if (ok) ans = min(ans, cost);
   }
+
   if (ans == INF)
     cout << -1 << endl;
   else

@@ -6,6 +6,12 @@ using P = pair<int, int>;
 
 // ダブリング
 
+/*
+    参考リンク
+    ABC 167 D - Teleporter
+      https://atcoder.jp/contests/abc167/tasks/abc167_d
+*/
+
 const int D = 60;
 const int MAX_N = 200005;
 int to[D][MAX_N];
@@ -18,6 +24,7 @@ int main() {
     cin >> to[0][i];
     to[0][i]--;
   }
+
   rep(i, D - 1) rep(j, n) { to[i + 1][j] = to[i][to[i][j]]; }
 
   int v = 0;
@@ -28,6 +35,7 @@ int main() {
       k -= l;
     }
   }
+
   cout << v + 1 << endl;
   return 0;
 }

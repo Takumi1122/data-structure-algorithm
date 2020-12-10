@@ -15,21 +15,20 @@ int main() {
     cin >> c[i];
     rep(j, m) cin >> a[i][j];
   }
+
   int ans = INF;
   for (int bit = 0; bit < (1 << n); ++bit) {
     int sum[m] = {0};
     int cost = 0;
-    for (int i = 0; i < n; ++i) {
+    rep(i, n) {
       if (bit & (1 << i)) {
         rep(j, m) sum[j] += a[i][j];
         cost += c[i];
       }
     }
-
     bool ok = true;
-
-    rep(j, m) {
-      if (sum[j] < x) ok = false;
+    rep(i, m) {
+      if (sum[i] < x) ok = false;
     }
     if (ok) ans = min(ans, cost);
   }

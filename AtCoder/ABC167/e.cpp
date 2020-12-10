@@ -4,10 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// auto mod int
-// https://youtu.be/L8grWxBlIZ4?t=9858
-// https://youtu.be/ERZuLAxZffQ?t=4807 : optimize
-// https://youtu.be/8uowVvQ_-Mo?t=1329 : division
+/*
+    参考リンク
+    ABC 167 E - Colorful Blocks
+      https://atcoder.jp/contests/abc167/tasks/abc167_e
+*/
+
 const int mod = 998244353;
 struct mint {
   ll x;  // typedef long long ll;
@@ -66,12 +68,18 @@ int main() {
 
   mint ans = 0;
   mint col = m;
+
+  // x: 同色の組
+  // グループ数: n-x
+  // グループの色の割り当て: m*(m-1)^(n-x-1)
+  // グループの分け方: c(n-1,x)
   for (int x = n - 1; x >= 0; --x) {
     mint now = col;
     now *= c(n - 1, x);
     if (x <= k) ans += now;
     col *= m - 1;
   }
+
   cout << ans << endl;
   return 0;
 }
