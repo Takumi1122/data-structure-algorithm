@@ -7,14 +7,15 @@ using P = pair<int, int>;
 int main() {
   int a, b, c, d;
   cin >> a >> b >> c >> d;
-  bool bl = false;
+
+  bool ok = false;
   while (a > 0 && c > 0) {
-    c = c - b;
-    if (c <= 0) bl = true;
-    a = a - d;
+    c -= b;
+    if (c <= 0) ok = true;
+    a -= d;
   }
 
-  if (bl) {
+  if (ok) {
     cout << "Yes" << endl;
   } else {
     cout << "No" << endl;

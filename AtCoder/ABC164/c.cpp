@@ -7,6 +7,7 @@ using P = pair<int, int>;
 int main() {
   int n;
   cin >> n;
+
   set<string> s;
   rep(i, n) {
     string c;

@@ -1,27 +1,33 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
+using ll = long long;
+using P = pair<int, int>;
 
-long long solve(const string &S) {
-  int N = S.size();
-  vector<long long> val(2019, 0);
-  long long fac = 1;
-  long long cur = 0;
-  val[cur]++;
-  for (int i = 0; i < N; ++i) {
-    long long add = S[N - 1 - i] - '0';
-    cur = (cur + fac * add) % 2019;
-    fac = (fac * 10) % 2019;
-    val[cur]++;
-  }
-  long long res = 0;
-  for (int i = 0; i < val.size(); ++i) {
-    res += val[i] * (val[i] - 1) / 2;
-  }
-  return res;
-}
+/*
+    参考リンク
+    ABC 164 D - Multiple of 2019
+      https://atcoder.jp/contests/abc164/tasks/abc164_d
+*/
 
 int main() {
-  string S;
-  cin >> S;
-  cout << solve(S) << endl;
+  string s;
+  cin >> s;
+
+  int n = s.size();
+  vector<ll> val(2019, 0);
+  ll fac = 1;
+  ll now = 0;
+  val[now]++;
+  rep(i, n) {
+    ll add = s[n - 1 - i] - '0';
+    now = (now + fac * add) % 2019;
+    fac = (fac * 10) % 2019;
+    val[now]++;
+  }
+
+  ll ans = 0;
+  rep(i, val.size()) ans += val[i] * (val[i] - 1) / 2;
+  cout << ans << endl;
+  return 0;
 }
