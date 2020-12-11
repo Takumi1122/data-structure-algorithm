@@ -4,49 +4,41 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-vector<pair<long long, long long> > prime_factorize(long long N) {
-  vector<pair<long long, long long> > res;
-  for (long long a = 2; a * a <= N; ++a) {
-    if (N % a != 0) continue;
-    long long ex = 0;  // 指数
+/*
+    参考リンク
+    ABC 169 D - Div Game
+      https://atcoder.jp/contests/abc169/tasks/abc169_d
+*/
 
-    // 割れる限り割り続ける
-    while (N % a == 0) {
-      ++ex;
-      N /= a;
+// 素因数分解
+vector<pair<ll, ll> > prime_factorize(ll n) {
+  vector<pair<ll, ll> > res;
+  for (ll p = 2; p * p <= n; ++p) {
+    if (n % p != 0) continue;
+    int num = 0;
+    while (n % p == 0) {
+      ++num;
+      n /= p;
     }
-
-    // その結果を push
-    res.push_back({a, ex});
+    res.push_back(make_pair(p, num));
   }
-
-  // 最後に残った数について
-  if (N != 1) res.push_back({N, 1});
+  if (n != 1) res.push_back(make_pair(n, 1));
   return res;
 }
 
 int main() {
   ll n;
   cin >> n;
-  const auto &res = prime_factorize(n);
-  int ans = 0;
-  if (n == 1) {
-    cout << 0 << endl;
-  } else {
-    for (auto p : res) {
-      ll count = 0;
-      ll sub = 1;
-      ll n1 = p.second;
-      while (n1 > 0) {
-        n1 -= sub;
-        if (n1 >= 0) {
-          sub++;
-          count++;
-        }
-      }
-      ans += count;
-    }
-    cout << ans << endl;
+
+  auto pf = prime_factorize(n);
+  ll ans = 0;
+  for (auto p : pf) {
+    ll e = p.second;
+    ll tmp = 0, now = 1;
+    while (e >= now) e -= now++, ++tmp;
+    ans += tmp;
   }
+
+  cout << ans << endl;
   return 0;
 }

@@ -15,19 +15,17 @@ int main() {
       return 0;
     }
   }
+
   ll ans = 1;
   const ll INF = 1e18;
   rep(i, n) {
-    if (a[i] > INF) {
-      cout << -1 << endl;
-      return 0;
-    }
     if (INF / ans < a[i]) {
       cout << -1 << endl;
       return 0;
     }
     ans *= a[i];
   }
+
   if (ans > INF) {
     cout << -1 << endl;
   } else {
