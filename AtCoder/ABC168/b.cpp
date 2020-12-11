@@ -8,6 +8,7 @@ int main() {
   int k;
   string s;
   cin >> k >> s;
+
   if (s.size() <= k) {
     cout << s << endl;
   } else {
