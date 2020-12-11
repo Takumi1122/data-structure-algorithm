@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 169 D - Div Game
+      https://atcoder.jp/contests/abc169/tasks/abc169_d
+*/
+
 // 素因数分解
 vector<pair<ll, ll> > prime_factorize(ll n) {
   vector<pair<ll, ll> > res;
@@ -23,13 +29,16 @@ vector<pair<ll, ll> > prime_factorize(ll n) {
 int main() {
   ll n;
   cin >> n;
+
   auto pf = prime_factorize(n);
-  ll res = 0;
+  ll ans = 0;
   for (auto p : pf) {
     ll e = p.second;
-    ll tmp = 0, cur = 1;
-    while (e >= cur) e -= cur++, ++tmp;
-    res += tmp;
+    ll tmp = 0, now = 1;
+    while (e >= now) e -= now++, ++tmp;
+    ans += tmp;
   }
-  cout << res << endl;
+
+  cout << ans << endl;
+  return 0;
 }
