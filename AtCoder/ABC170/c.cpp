@@ -7,21 +7,20 @@ using P = pair<int, int>;
 int main() {
   int x, n;
   cin >> x >> n;
-  vector<int> p(n);
-  rep(i, n) cin >> p[i];
-  int ab = 1e6;
-  int ans;
-  for (int i = -300; i <= 300; i++) {
-    bool t = false;
-    rep(j, n) {
-      if (i == p[j]) t = true;
-    }
-    if (t) continue;
-    if (abs(x - i) < ab) {
-      ab = abs(x - i);
-      ans = i;
-    }
+  vector<int> d(102);
+  rep(i, n) {
+    int p;
+    cin >> p;
+    d[p] = 1;
   }
-  cout << ans << endl;
+
+  P ans(99999, -1);
+  for (int i = 0; i <= 101; ++i) {
+    if (d[i] == 1) continue;
+    int dif = abs(x - i);
+    ans = min(ans, P(dif, i));
+  }
+
+  cout << ans.second << endl;
   return 0;
 }
