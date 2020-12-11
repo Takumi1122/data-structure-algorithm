@@ -18,7 +18,7 @@ int main() {
   cin >> n >> m;
 
   Graph G(n);
-  for (int i = 0; i < m; ++i) {
+  rep(i, m) {
     int a, b;
     cin >> a >> b;
     a--;
@@ -55,7 +55,6 @@ int main() {
   }
 
   cout << "Yes" << endl;
-  rep(i, n - 1) { cout << pre[i + 1] << endl; }
-
+  rep(i, n - 1) cout << pre[i + 1] << endl;
   return 0;
 }
