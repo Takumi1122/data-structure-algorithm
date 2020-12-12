@@ -15,6 +15,7 @@ using P = pair<int, int>;
 int main() {
   int n;
   cin >> n;
+
   // yaku[i]: 整数iの約数の個数
   vector<ll> yaku(n + 1, 1);
   for (int i = 2; i <= n; i++) {
@@ -23,10 +24,12 @@ int main() {
       yaku[j]++;
     }
   }
+
   ll sum = 0;
   for (int i = 1; i <= n; i++) {
     sum += i * yaku[i];
   }
+
   cout << sum << endl;
   return 0;
 }
