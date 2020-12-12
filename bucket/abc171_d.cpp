@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 171 D - Replacing
+      https://atcoder.jp/contests/abc171/tasks/abc171_d
+*/
+
 int main() {
   int n, q;
   cin >> n;
