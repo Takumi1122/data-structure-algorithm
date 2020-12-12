@@ -4,10 +4,13 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 包除原理 完全順列
+// m = n の時: (完全順列の個数) * n!
+
 /*
     参考リンク
-    ABC 156 E - Roaming
-      https://atcoder.jp/contests/abc156/tasks/abc156_e
+    ABC 172 E - NEQ
+      https://atcoder.jp/contests/abc172/tasks/abc172_e
 */
 
 const int mod = 1000000007;
@@ -27,18 +30,9 @@ struct mint {
     (x *= a.x) %= mod;
     return *this;
   }
-  mint operator+(const mint a) const {
-    mint res(*this);
-    return res += a;
-  }
-  mint operator-(const mint a) const {
-    mint res(*this);
-    return res -= a;
-  }
-  mint operator*(const mint a) const {
-    mint res(*this);
-    return res *= a;
-  }
+  mint operator+(const mint a) const { return mint(*this) += a; }
+  mint operator-(const mint a) const { return mint(*this) -= a; }
+  mint operator*(const mint a) const { return mint(*this) *= a; }
   mint pow(ll t) const {
     if (!t) return 1;
     mint a = pow(t >> 1);
@@ -49,16 +43,13 @@ struct mint {
 
   // for prime mod
   mint inv() const { return pow(mod - 2); }
-  mint& operator/=(const mint a) { return (*this) *= a.inv(); }
-  mint operator/(const mint a) const {
-    mint res(*this);
-    return res /= a;
-  }
+  mint& operator/=(const mint a) { return *this *= a.inv(); }
+  mint operator/(const mint a) const { return mint(*this) /= a; }
 };
+istream& operator>>(istream& is, const mint& a) { return is >> a.x; }
+ostream& operator<<(ostream& os, const mint& a) { return os << a.x; }
 
-// 構築: O(n)
 struct combination {
-  // fact[i]: iの階乗
   vector<mint> fact, ifact;
   combination(int n) : fact(n + 1), ifact(n + 1) {
     assert(n < mod);
@@ -72,22 +63,24 @@ struct combination {
     return fact[n] * ifact[k] * ifact[n - k];
   }
   mint p(int n, int k) { return fact[n] * ifact[n - k]; }
-};
+} c(1000005);
 
 int main() {
-  int n, k;
-  cin >> n >> k;
+  int n, m;
+  cin >> n >> m;
 
-  k = min(k, n - 1);
-  combination c(n);
-  mint ans;
-  for (int i = 0; i <= k; i++) {
-    // c(n,i): どの部屋を0人にするかの選び方
-    // c((n-i-1)+i, i): 0人以外の部屋(n-i)に対して移動するi人を振り分ける
-    // 重複組み合わせ: c((n-i)+i-1,i)
-    ans += c(n, i) * c((n - i) + i - 1, i);
+  mint ans = 0;
+  rep(i, n + 1) {
+    // Ai = Bi の場所がi個
+    mint now = c(n, i);
+    // Bの(Ai ≠ Bi)が何通りあるか
+    now *= c.p(m - i, n - i);
+    if (i & 1) now = -now;
+    ans += now;
   }
+  // Aiの並べ替えを掛ける
+  ans *= c.p(m, n);
 
-  cout << ans.x << endl;
+  cout << ans << endl;
   return 0;
 }
