@@ -9,6 +9,7 @@ int main() {
   cin >> n >> k;
   vector<int> a(n);
   rep(i, n) cin >> a[i];
+
   int l = 0, r = 1e9;
   while (r - l > 1) {
     int x = (l + r) / 2;
@@ -22,6 +23,7 @@ int main() {
     else
       l = x;
   }
+
   cout << r << endl;
   return 0;
 }

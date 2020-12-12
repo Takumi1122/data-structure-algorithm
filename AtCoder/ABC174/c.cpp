@@ -7,19 +7,16 @@ using P = pair<int, int>;
 int main() {
   int k;
   cin >> k;
-  if (7 % k == 0) {
-    cout << 1 << endl;
-    return 0;
-  }
-  string s = "7";
-  for (int i = 1; i <= 1e8; i++) {
-    s = s + '7';
-    int num = stoi(s);
-    if (num % k == 0) {
-      cout << i + 1 << endl;
+
+  int x = 7 % k;
+  for (int i = 1; i <= k; ++i) {
+    if (x == 0) {
+      cout << i << endl;
       return 0;
     }
-    }
+    x = (x * 10 + 7) % k;
+  }
+
   cout << -1 << endl;
   return 0;
 }

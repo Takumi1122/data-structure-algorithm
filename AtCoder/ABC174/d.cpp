@@ -8,10 +8,14 @@ int main() {
   int n;
   string s;
   cin >> n >> s;
+
+  // a: R->W, b: W->R
   int a = 0, b = 0;
-  rep(i, n) if (s[i] == 'R')++ a;
+  // 全てが白色と考えた場合
+  rep(i, n) if (s[i] == 'R') a++;
   int ans = max(a, b);
   rep(i, n) {
+    // i: 左からi+1個が赤と考えた場合
     if (s[i] == 'R')
       --a;
     else
@@ -19,6 +23,7 @@ int main() {
     int now = max(a, b);
     ans = min(ans, now);
   }
+
   cout << ans << endl;
   return 0;
 }
