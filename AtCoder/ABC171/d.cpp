@@ -5,31 +5,24 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int n;
+  int n, q;
   cin >> n;
-  vector<int> a(n);
-  map<int, ll> x;
   ll sum = 0;
+  vector<ll> num(110000, 0);
   rep(i, n) {
-    cin >> a[i];
-    x[a[i]]++;
-    sum += a[i];
+    ll a;
+    cin >> a;
+    sum += a;
+    num[a]++;
   }
-  int q;
+
   cin >> q;
-  vector<P> bc(q);
   rep(i, q) {
     ll b, c;
     cin >> b >> c;
-    bc[i].first = b;
-    bc[i].second = c;
-  }
-  rep(i, q) {
-    ll y = bc[i].second - bc[i].first;
-    sum += y * x[bc[i].first];
+    sum += (c - b) * num[b];
+    num[c] += num[b];
+    num[b] = 0;
     cout << sum << endl;
-    x[bc[i].second] += x[bc[i].first];
-    x[bc[i].first] = 0;
   }
-  return 0;
 }

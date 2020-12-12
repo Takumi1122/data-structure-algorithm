@@ -14,4 +14,5 @@ int main() {
     b ^= a[i];
   }
   rep(i, n) cout << (b ^ a[i]) << endl;
+  return 0;
 }
