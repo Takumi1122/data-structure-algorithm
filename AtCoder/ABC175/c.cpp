@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 175 C - Walking Takahashi
+      https://atcoder.jp/contests/abc175/tasks/abc175_c
+*/
+
 int main() {
   ll x, k, d;
   cin >> x >> k >> d;

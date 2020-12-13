@@ -4,6 +4,14 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 周期性 1~K回の移動
+
+/*
+    参考リンク
+    ABC 175 D - Moving Piece
+      https://atcoder.jp/contests/abc175/tasks/abc175_d
+*/
+
 int main() {
   int n, k;
   cin >> n >> k;
@@ -16,6 +24,7 @@ int main() {
   rep(si, n) {
     int x = si;
     vector<int> s;
+    // 1周のスコアの合計
     ll tot = 0;
     while (1) {
       x = p[x];
@@ -25,6 +34,8 @@ int main() {
     }
     int l = s.size();
     ll t = 0;
+    // tot < 0: 周期の前の方で切る
+    // tot > 0: 周期の後ろの方で切る
     rep(i, l) {
       t += s[i];
       if (i + 1 > k) break;
