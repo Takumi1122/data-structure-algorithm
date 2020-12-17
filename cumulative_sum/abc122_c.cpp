@@ -4,6 +4,15 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 'C'が右隣にあるような'A'の個数
+// "TTACTTTA|C"のような「右端の'A'の右隣に'C'がある」というような'A'を除外する
+
+/*
+    参考リンク
+    ABC 122 C - GeT AC
+      https://atcoder.jp/contests/abc122/tasks/abc122_c
+*/
+
 int main() {
   int n, q;
   cin >> n >> q;
