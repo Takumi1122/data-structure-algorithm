@@ -4,6 +4,6 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-const double PI = acosl(-1.0);
-double torad(int deg) { return (double)(deg)*PI / 180; }
-double todeg(double ang) { return ang * 180 / PI; }
+const double PI = acos(-1.0);
+double torad(double deg) { return deg * PI / 180; }
+double todeg(double rad) { return rad * 180 / PI; }
