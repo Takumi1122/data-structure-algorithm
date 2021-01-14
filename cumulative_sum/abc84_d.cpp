@@ -4,6 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+/*
+    参考リンク
+    ABC 84 D - 2017-like Number
+      https://atcoder.jp/contests/abc084/tasks/abc084_d
+*/
+
 int main() {
   // エラトステネスのふるい
   int MAX = 101010;
@@ -25,7 +31,6 @@ int main() {
   vector<int> s(MAX + 1, 0);
   rep(i, MAX) s[i + 1] = s[i] + a[i];
 
-  // クエリ処理
   int q;
   cin >> q;
   rep(i, q) {
