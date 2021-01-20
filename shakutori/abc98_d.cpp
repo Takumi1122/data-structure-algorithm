@@ -4,7 +4,8 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// 連続する部分列のうち、「xor和と加算和とが等しい」という条件を満たすもの
+// しゃくとりの条件 =「条件を満たす区間の部分区間も条件を満たす」
+// 連続する部分列のうち,「xor和と加算和とが等しい」という条件を満たすもの
 
 /*
     参考リンク
@@ -18,7 +19,7 @@ int main() {
   vector<int> a(n);
   rep(i, n) cin >> a[i];
 
-  ll res = 0;
+  ll ans = 0;
   int right = 0;
   int sum = 0;
   rep(left, n) {
@@ -26,7 +27,7 @@ int main() {
       sum += a[right];
       ++right;
     }
-    res += right - left;
+    ans += right - left;
     if (left == right)
       ++right;
     else {
@@ -34,5 +35,6 @@ int main() {
     }
   }
 
-  cout << res << endl;
+  cout << ans << endl;
+  return 0;
 }
