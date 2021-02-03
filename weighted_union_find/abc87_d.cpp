@@ -4,6 +4,16 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
+// 重み付きUnionFind
+// 差分制約に使用 x[ri] - x[li] = di
+// root の重みは0
+
+/*
+    参考リンク
+    ABC 87 D - People on a Line
+      https://atcoder.jp/contests/abc087/tasks/arc090_b
+*/
+
 template <class Abel>
 struct UnionFind {
   vector<int> par;
@@ -34,8 +44,10 @@ struct UnionFind {
     return diff_weight[x];
   }
 
+  // x と y が同じグループにいるかどうかを判定する
   bool issame(int x, int y) { return root(x) == root(y); }
 
+  // weight(y) = weight(x) + w となるように x と y をマージする
   bool merge(int x, int y, Abel w) {
     w += weight(x);
     w -= weight(y);
@@ -49,6 +61,7 @@ struct UnionFind {
     return true;
   }
 
+  // x と y とが同じグループにいるとき、weight(y) - weight(x) をリターンする
   Abel diff(int x, int y) { return weight(y) - weight(x); }
 };
 
@@ -56,6 +69,7 @@ int main() {
   int n, m;
   cin >> n >> m;
   UnionFind<int> uf(n);
+
   rep(i, m) {
     int l, r, d;
     cin >> l >> r >> d;
@@ -71,4 +85,5 @@ int main() {
     }
   }
   cout << "Yes" << endl;
+  return 0;
 }
