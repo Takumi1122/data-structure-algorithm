@@ -5,6 +5,12 @@ using ll = long long;
 using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
+/*
+    参考リンク
+    ABC 79 B - Lucas Number
+      https://atcoder.jp/contests/abc079/tasks/abc079_b
+*/
+
 ll l[90];
 
 ll rec(ll n) {
