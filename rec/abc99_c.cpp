@@ -6,8 +6,7 @@ using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 
 // メモ化再帰
-// DPの計算量は通常 O(ノード数+遷移数)
-// 今回の遷移数 O(n*log(n))
+// O(n*log(n))
 
 /*
     参考リンク
