@@ -19,6 +19,8 @@ struct E {
   E(int to = 0, int co = 0) : to(to), co(co) {}
 };
 
+const int INF = 1001001001;
+
 int main() {
   int n, m;
   cin >> n >> m;
@@ -31,7 +33,6 @@ int main() {
     g[a].emplace_back(b, c);
   }
 
-  const int INF = 1001001001;
   rep(sv, n) {
     vector<int> dist(n, INF);
     priority_queue<P, vector<P>, greater<P>> q;
@@ -42,14 +43,14 @@ int main() {
       q.emplace(d, v);
     };
     // 最初に使う辺の候補
-    for (auto&& e : g[sv]) push(e.to, e.co);
+    for (auto e : g[sv]) push(e.to, e.co);
 
     while (!q.empty()) {
       int d = q.top().first;
       int v = q.top().second;
       q.pop();
       if (dist[v] != d) continue;
-      for (auto&& e : g[v]) {
+      for (auto e : g[v]) {
         push(e.to, d + e.co);
       }
     }
