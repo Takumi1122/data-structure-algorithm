@@ -42,7 +42,8 @@ int main() {
   push(x, 0);
 
   while (!q.empty()) {
-    auto [x, v] = q.top();
+    ll x = q.top().first;
+    int v = q.top().second;
     q.pop();
     if (dist[v] != x) continue;
     for (auto e : g[v]) {
