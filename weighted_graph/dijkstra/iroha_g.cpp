@@ -1,51 +1,71 @@
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
-const long long INF = 1LL << 62;
-int N, M, K, X[2000];
-long long Y[2000];
-vector<pair<int, long long>> edge[2000];
-long long cost[2000][4000];
+using ll = long long;
+using P = pair<int, ll>;
 
-long long dykstra() {
-  priority_queue<pair<long long, pair<int, int>>> que;
-  cost[0][0] = 0;
-  que.push({0, {0, 0}});
-  while (!que.empty()) {
-    long long c = -que.top().first;
-    long long sta = que.top().second.first;
-    long long flo = que.top().second.second;
-    que.pop();
-    if (flo < K && cost[sta][flo + X[sta]] > c + Y[sta]) {
-      cost[sta][flo + X[sta]] = c + Y[sta];
-      que.push({-cost[sta][flo + X[sta]], {sta, flo + X[sta]}});
-    }
-    for (int i = 0; i < edge[sta].size(); i++) {
-      if (cost[edge[sta][i].first][flo] > c + edge[sta][i].second) {
-        cost[edge[sta][i].first][flo] = c + edge[sta][i].second;
-        que.push({-cost[edge[sta][i].first][flo], {edge[sta][i].first, flo}});
-      }
-    }
-  }
-  long long answer = INF;
-  for (int i = 0; i < K; i++) answer = min(answer, cost[N - 1][K + i]);
-  if (answer == INF) answer = -1;
-  return answer;
-}
+/*
+    参考リンク
+    いろはちゃんコンテスト Day2 G - 通学路
+      https://atcoder.jp/contests/iroha2019-day2/tasks/iroha2019_day2_g
+*/
+
+const ll INF = 1LL << 60;
+const int MAX_N = 1010;
+const int MAX_K = 4000;
+
+struct Data {
+  int v, s;
+  ll x;
+  Data(int v, int s, ll x) : v(v), s(s), x(x) {}
+  // 最小ヒープにするため逆にしている
+  bool operator<(const Data& a) const { return x > a.x; }
+};
+
+vector<P> g[MAX_N];
+ll cost[MAX_N][MAX_K];
 
 int main() {
-  cin >> N >> M >> K;
-  for (int i = 0; i < M; i++) {
-    int A, B;
-    long long C;
-    cin >> A >> B >> C;
-    A--;
-    B--;
-    edge[A].push_back(make_pair(B, C));
-    edge[B].push_back(make_pair(A, C));
+  int n, m, k;
+  cin >> n >> m >> k;
+  rep(i, m) {
+    int a, b, c;
+    cin >> a >> b >> c;
+    a--;
+    b--;
+    g[a].emplace_back(b, c);
+    g[b].emplace_back(a, c);
   }
-  for (int i = 0; i < N; i++) {
-    cin >> X[i] >> Y[i];
-    for (int j = 0; j < 2 * K; j++) cost[i][j] = INF;
+  vector<int> x(n), y(n);
+  rep(i, n) cin >> x[i] >> y[i];
+
+  rep(i, n) rep(j, MAX_K) cost[i][j] = INF;
+
+  priority_queue<Data> q;
+  auto push = [&](int v, int s, ll x) {
+    if (s >= MAX_K) return;
+    if (cost[v][s] <= x) return;
+    cost[v][s] = x;
+    q.emplace(v, s, x);
+  };
+  push(0, 0, 0);
+
+  while (!q.empty()) {
+    Data hoge = q.top();
+    q.pop();
+    int v = hoge.v;
+    int s = hoge.s;
+    ll c = hoge.x;
+    if (cost[v][s] != c) continue;
+    if (s < k) push(v, s + x[v], c + y[v]);
+    for (auto e : g[v]) {
+      push(e.first, s, c + e.second);
+    }
   }
-  cout << dykstra() << endl;
+
+  ll ans = INF;
+  rep(i, k) ans = min(ans, cost[n - 1][k + i]);
+  if (ans == INF) ans = -1;
+  cout << ans << endl;
+  return 0;
 }
