@@ -2,6 +2,7 @@
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
 using ll = long long;
+// ダイクストラ法ではpair<ll,int>にする
 using P = pair<ll, int>;
 
 // ダイクストラ法 O((|V|+|E|)log|V|)
