@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// o(n * log(m)) 累積和 + 二分探索
+// O(n * log(m)) 累積和 + 二分探索
 
 int main() {
   ll n, m, k;
