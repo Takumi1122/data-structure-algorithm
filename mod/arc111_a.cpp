@@ -3,7 +3,6 @@
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
-using Graph = vector<vector<int>>;
 
 // floor(10^n/m) % m を求める
 
