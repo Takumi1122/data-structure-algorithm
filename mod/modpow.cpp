@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-// a^n mod を計算する
+// a^n mod を計算する O(log(n))
 ll modpow(ll a, ll n, ll mod) {
   ll res = 1;
   while (n > 0) {
