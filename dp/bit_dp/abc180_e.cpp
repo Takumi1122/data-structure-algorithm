@@ -10,7 +10,7 @@ using P = pair<int, int>;
       https://atcoder.jp/contests/abc180/tasks/abc180_e
 */
 
-const int INF = 1000100100;
+const int INF = 1001001001;
 
 template <class T>
 bool chmin(T &a, const T &b) {
@@ -38,17 +38,14 @@ int main() {
     dist[i][j] = now;
   }
 
-  rep(i, n) {
-    if (i == 0) continue;
-    dp[1 << i][i] = dist[0][i];
-  }
+  rep(i, n) dp[1 << i][i] = dist[0][i];
 
-  rep(S, n2) {
+  rep(s, n2) {
     rep(v, n) {
       rep(u, n) {
-        // 頂点vがSに所属していないことを確認
-        if ((S & (1 << v)) == 0) {
-          if (v != u) chmin(dp[S | (1 << v)][v], dp[S][u] + dist[u][v]);
+        // 頂点vがsに所属していないことを確認
+        if ((s & (1 << v)) == 0) {
+          if (v != u) chmin(dp[s | (1 << v)][v], dp[s][u] + dist[u][v]);
         }
       }
     }
