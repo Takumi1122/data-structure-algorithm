@@ -40,14 +40,11 @@ int main() {
 
   rep(i, n) dp[1 << i][i] = dist[0][i];
 
-  rep(s, n2) {
-    rep(v, n) {
-      rep(u, n) {
-        // 頂点vがsに所属していないことを確認
-        if ((s & (1 << v)) == 0) {
-          if (v != u) chmin(dp[s | (1 << v)][v], dp[s][u] + dist[u][v]);
-        }
-      }
+  rep(s, n2) rep(i, n) {
+    if (~s >> i & 1) continue;
+    rep(j, n) {
+      if (s >> j & 1) continue;
+      chmin(dp[s | 1 << j][j], dp[s][i] + dist[i][j]);
     }
   }
 
