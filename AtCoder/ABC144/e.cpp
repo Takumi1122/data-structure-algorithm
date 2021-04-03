@@ -1,7 +1,18 @@
 #include <bits/stdc++.h>
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
-typedef long long ll;
+using ll = long long;
+using P = pair<int, int>;
+using Graph = vector<vector<int>>;
+
+// 解を仮定し可能かを二分探索で判定
+// 最小値を求める
+
+/*
+    参考リンク
+    ABC 144 E - Gluttony
+      https://atcoder.jp/contests/abc144/tasks/abc144_e
+*/
 
 int main() {
   int n;
